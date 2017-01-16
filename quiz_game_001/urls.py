@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from quiz_app.views import QuestionList, QuestionDetail
+from quiz_app.views import QuestionList, QuestionDetail, NPCPlayerList, NPCPlayerDetail
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^questions/$', QuestionList.as_view(), name='question-list'),
     url(r'^questions/(?P<pk>(\d)+)', QuestionDetail.as_view(), name='question-detail'),
+    url(r'^npcs/$', NPCPlayerList.as_view(), name='npc-list'),
+    url(r'^npcs/(?P<pk>(\d)+)', NPCPlayerDetail.as_view(), name='npc-detail'),
 ]
