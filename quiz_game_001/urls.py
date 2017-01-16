@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from quiz_app.views import QuestionList, QuestionDetail, NPCPlayerList, NPCPlayerDetail
+from quiz_app.views import QuestionList, QuestionDetail, NPCPlayerList, NPCPlayerDetail, TadeuszSznukList
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^questions/(?P<pk>(\d)+)', QuestionDetail.as_view(), name='question-detail'),
     url(r'^npcs/$', NPCPlayerList.as_view(), name='npcplayer-list'),
     url(r'^npcs/(?P<pk>(\d)+)', NPCPlayerDetail.as_view(), name='npcplayer-detail'),
+    url(r'^sznuk/$', TadeuszSznukList.as_view(), name='tadeuszsznuk-list'),
 ]

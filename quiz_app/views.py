@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from quiz_app.models import Question, NPCPlayer
-from quiz_app.serializers import QuestionSerializer, NPCPlayerSerialiezer
+from quiz_app.models import Question, NPCPlayer, TadeuszSznuk
+from quiz_app.serializers import QuestionSerializer, NPCPlayerSerialiezer, TadeuszSznukSerialiezer
 from rest_framework import generics
 
 
@@ -24,3 +24,9 @@ class NPCPlayerList(generics.ListCreateAPIView):
 class NPCPlayerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = NPCPlayer.objects.all()
     serializer_class = NPCPlayerSerialiezer
+
+
+
+class TadeuszSznukList(generics.ListCreateAPIView):
+    queryset = TadeuszSznuk.objects.all()
+    serializer_class = TadeuszSznukSerialiezer

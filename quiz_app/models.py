@@ -42,6 +42,9 @@ class NPCPlayer(models.Model):
     level = models.SmallIntegerField(choices=LEVEL)
     points = models.IntegerField(default=0)
 
+    class Meta:
+        ordering = ['points']
+
 class Player(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     mug_shot = models.ImageField(upload_to='static/players', null=True, blank=True)
@@ -49,3 +52,11 @@ class Player(models.Model):
     occupation = models.CharField(max_length=128, )
     interested = models.CharField(max_length=128, )
     points = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['points']
+
+class TadeuszSznuk(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(upload_to='static/media')
+

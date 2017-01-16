@@ -1,0 +1,20 @@
+.hidden {
+	display: none;
+}
+
+#sznuk {
+	display: inline-flex;
+}
+
+#others {
+	display: inline-flex;
+}
+
+div {
+margin: 12px;
+padding: 3px;
+border:  1px solid black}
+
+form {
+margin: 12px;
+}
