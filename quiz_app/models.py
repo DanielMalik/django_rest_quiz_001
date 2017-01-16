@@ -27,9 +27,10 @@ class Question(models.Model):
     media = models.FileField(upload_to='static/media', null=True, blank=True)
 
 LEVEL = (
-    (1, 'tabloid'),
-    (2, 'regular'),
-    (3, 'yoda')
+    (1, 'gump'),
+    (2, 'joey'),
+    (3, 'ross'),
+    (4, 'sheldon')
 )
 
 class NPCPlayer(models.Model):
