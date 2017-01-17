@@ -3,6 +3,9 @@ console.log("jQuery OK");
 
 data = {};
 asked = []
+chance = 3
+$answerInput = $('#answer-input');
+$answerButt = $('#answer-butt');
 main();
 
 
@@ -20,7 +23,13 @@ function randomQuestion(){
 
 		        if ($.inArray(ran_key, asked) != -1) {
 		        	console.log('wyjebka na losowaniu');
+		        	if (dataLen == asked.length) {
+		        		console.log("nie ma wiecej pytan");
+		        		return false
+		        	}
+		        	else {
 		        	return randomQuestion();
+		        }
 		        }
 		        else {
 
@@ -33,14 +42,15 @@ function randomQuestion(){
 				}
 			}
 
-function askAndCheckRepeat(questNow) {
+function askAndCheckRepeat() {
 
+	console.log("szanse: " + chance);
 	$query = $('#query');
 	console.log($query);
 	$media = $('#media');
 	console.log($media);
 	$timebelt = $('#timebelt');
-	$answerInput = $('answer-input');
+	$answerInput = $('#answer-input');
 	$answerButt = $('#answer-butt');
 			//pokazujemy typowi pytanie
 	var $thisQuestion = $("<p>");
@@ -53,6 +63,7 @@ function askAndCheckRepeat(questNow) {
 
     		console.log("some media");
     		$media.detach();
+    		$media.html("");
     		var $audio = $('<audio id="dynamic-audio" type="audio/mpeg">') || new Audio();
             var $play = $('<button id="play-it" class="btn btn-danger">');
             $audio.attr('src', questNow['toAsk']['media']);
@@ -67,25 +78,53 @@ function askAndCheckRepeat(questNow) {
                             
                             $('audio')[0].play();
                             
-                        });
-            setTimeout(function(){
+                      
+          	 	 			setTimeout(function(){	
+
             						$('audio')[0].pause();
             							alert("Audio Stop Successfully");
         							}, 15000);
 
+            	 });
 
     	}	else {
     		console.log('nie ma media');
     		$query.detach();
+    		$query.find("strong").html("");
     		$thisQuestion.html("<strong>" + $question + "</strong>");
     		$query.append($thisQuestion);
     		$('#question').append($query);
     	}
 
+
     		//paczamy czy dobrze odpowiedział
    
 }
+$answerButt.on('click', function(ev) {
+   		// ev.preventDefault();
+   		console.log($answerInput.val());
+   		console.log(questNow['toAsk']['answer']);
+   		console.log($answerInput.val() == questNow['toAsk']['answer']);
 
+   		if ($answerInput.val() == questNow['toAsk']['answer']) {
+
+   			$answerInput.val('');
+   			console.log('ok answer');
+   			console.log(chance);
+   		
+   			askAndCheckRepeat(randomQuestion());
+   		} //if answ ok
+   		else {
+   			$answerInput.val('');
+   			console.log('wrong');
+   			chance -= 1
+   			console.log(chance);
+   		
+   			askAndCheckRepeat(randomQuestion());
+   					
+   		} //else - answer wrong
+
+   }); //ev.list do submit
 function main() {
 
 
@@ -105,10 +144,10 @@ function main() {
         	
         	
 			}
-			randomQuestion();
-			console.log(questNow);
+			
 
-			askAndCheckRepeat(questNow);
+			askAndCheckRepeat(randomQuestion());
+
 
 			
 			
