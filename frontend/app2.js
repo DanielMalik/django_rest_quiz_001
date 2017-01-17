@@ -1,6 +1,7 @@
 $(document).ready(function () {
 console.log("jQuery OK");
 
+stage = 1;
 data = {};
 asked = []
 chance = 3
@@ -40,7 +41,7 @@ function randomQuestion(){
 
 		        return questNow = {'data':data, 'toAsk': toAsk, 'asked' : asked}
 				}
-			}
+			};
 
 function askAndCheckRepeat() {
 
@@ -68,6 +69,7 @@ function askAndCheckRepeat() {
             var $play = $('<button id="play-it" class="btn btn-danger">');
             $audio.attr('src', questNow['toAsk']['media']);
             $media.append($audio);
+            $play.text('PLAY');
             $media.append($play);
             console.log($audio);
             $query.append($media);
@@ -99,29 +101,55 @@ function askAndCheckRepeat() {
 
     		//paczamy czy dobrze odpowiedział
    
-}
+};
+
+function stage2() {
+	askAndCheckRepeat(randomQuestion());
+
+};
+
 $answerButt.on('click', function(ev) {
    		// ev.preventDefault();
    		console.log($answerInput.val());
    		console.log(questNow['toAsk']['answer']);
    		console.log($answerInput.val() == questNow['toAsk']['answer']);
+   		console.log("dlugosc listy zadanych pytan :" + asked.length);
 
    		if ($answerInput.val() == questNow['toAsk']['answer']) {
 
    			$answerInput.val('');
    			console.log('ok answer');
    			console.log(chance);
+
+   			if (asked.length == 2) {
+   				console.log("ETAP 2");
+   				stage2();
+   			}
+   			else {
    		
    			askAndCheckRepeat(randomQuestion());
+   			}
    		} //if answ ok
    		else {
    			$answerInput.val('');
    			console.log('wrong');
    			chance -= 1
+   			if (chance > 1 && asked.length < 2) { //1 zla odpowiedz w stage 1
    			console.log(chance);
    		
    			askAndCheckRepeat(randomQuestion());
-   					
+   			}
+   			else if (stage == 1 && asked.length == 2) { //przechodzi do rundy2 z 2 szansami -1z 1 db
+   				console.log("ETAP 2");
+   				stage = 2;
+   				console.log("stage teraz bedzie :" + stage);
+   				stage2();
+   			}
+   			else if (stage == 1 && chance == 1) { //na koniec 1wszej rundy - 2 zle odp
+   				console.log("koniec");
+   				return false
+   			}
+
    		} //else - answer wrong
 
    }); //ev.list do submit
