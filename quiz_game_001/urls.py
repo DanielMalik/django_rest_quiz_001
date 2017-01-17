@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^npcs/$', NPCPlayerList.as_view(), name='npcplayer-list'),
     url(r'^npcs/(?P<pk>(\d)+)', NPCPlayerDetail.as_view(), name='npcplayer-detail'),
     url(r'^sznuk/$', TadeuszSznukList.as_view(), name='tadeuszsznuk-list'),
-] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

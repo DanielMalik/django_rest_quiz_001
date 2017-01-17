@@ -14,7 +14,7 @@
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"
           integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous"></script>
-  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="app2.js"></script>
 
 
 </head>
@@ -36,17 +36,17 @@
         </div>
         <div id='question'> tu bedzie pytanie
           <section id='query'>tu zadajemy pytanie - section
-             <div id='media'>
+             <section id='media'>
               media - czyli zdjęcia lub audio do pytania
              
-            </div>
+            </section>
           </section>
           <div id='timebelt'>timebelt</div>
         </div>
         <div id='answer'>
-          <form>
-            <label>Answer:<input type='text' name='player_answer'></label>
-            <button type='submit' value='submit' class='btn btn-primary'>ANSWER</button>
+          <form action="#" method="POST">
+            <label>Answer:<input id="answer-input" type='text' name='player_answer'></label>
+            <button id="answer-butt" type='submit' value='submit' class='btn btn-primary'>ANSWER</button>
           </form>
           <div id='comment' class='hidden'>
             tu bedzie komentarz
