@@ -31,3 +31,35 @@ img {
     width: 100px;
     height: 100px;
 }
+.others {
+    width: 100%;}
+
+.npc {
+    margin: 3px;
+    padding: 3px;
+    width: 100px;
+    height: 200px;
+    display: inline-block;
+}
+
+.chance-lamp{
+    margin: 2px;
+    padding: 1px;
+    width: 10px;
+    height: 10px;
+    background-color: #ff0;
+    display: inline-block;
+    position: relative;
+    bottom: 0%;
+}
+
+.chance-lamp-player{
+    margin: 2px;
+    padding: 1px;
+    width: 30px;
+    height: 30px;
+    background-color: #ff0;
+    display: inline-block;
+    position: relative;
+    bottom: 0;
+}

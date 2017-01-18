@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from quiz_app.models import Question, NPCPlayer, TadeuszSznuk
 from quiz_app.serializers import QuestionSerializer, NPCPlayerSerialiezer, TadeuszSznukSerialiezer
 from rest_framework import generics
@@ -89,12 +89,17 @@ class PlayerLog(View):
             if user is not None:
                 print('ok')
                 login(request, user)
-                return render(request, "quiz_app/quiz.html")
+                return redirect('quiz')
 
             else:
                 print("k.o.")
                 form = PlayerLogin()
                 return render(request, 'quiz_app/login.html', {'form': form})
+
+def logout_view(request, next_page='/quiz'):
+    logout(request)
+    return redirect('player-login')
+
 
 # REST server views
 

@@ -13,7 +13,16 @@
     <section id='others_section'>reszta, inni - section</section>
 
         {% for npc in npcs %}
+        <div id="{{npc.id}}" class="npc" data-level="{{ npc.level }}">
             <p>{{npc.name}}</p>
+
+            <div class="chances">
+                <div class="chance-lamp" data-id="chance_1"></div>
+                <div class="chance-lamp" data-id="chance_2"></div>
+                <div class="chance-lamp" data-id="chance_3"></div>
+            </div>
+
+        </div>
         {% endfor%}
     </div>
 
@@ -22,8 +31,10 @@
             <h2> {{ player.user.username }} </h2>
             <h3> {{ player.occupation }} </h3>
             <img src="{{ STATIC_URL }}/static/media/{{player.mug_shot}} ">
-        <div id='points' class='hidden'>
-        tu bedą szanse, a w finale także punkty
+        <div class="chances-player">
+            <div class="chance-lamp-player" data-id="chance_1"></div>
+            <div class="chance-lamp-player" data-id="chance_2"></div>
+            <div class="chance-lamp-player" data-id="chance_3"></div>
         </div>
         <div id='question'> tu bedzie pytanie
           <section id='query'>tu zadajemy pytanie - section
@@ -53,8 +64,8 @@
 <footer>
 
 
-    <script src="{% static 'JS/app2.js' %}"></script>
-
+    <!--<script src="{% static 'JS/app2.js' %}"></script>-->
+     <script src="{% static 'JS/app2.js' %}"></script>
 
 </footer>
 

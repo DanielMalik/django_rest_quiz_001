@@ -3,68 +3,23 @@ console.log("jQuery OK");
 
 stage = 1;
 data = {};
+console.log(data);
 asked = []
 chance = 3
 $answerInput = $('#answer-input');
 $answerButt = $('#answer-butt');
-main();
+
+getQuestions();
+console.log(data);
 
 function npcSimulation() {
 
-    var $npc = $('.npc')
-    var $npcs_all_answers = {}
-    for (var n = 0; n < $npc.length; n ++) {
-        $class = $npc.(level)
-        if ($class == 4) {
-             var ran_answer = Math.floor(Math.random() * $class);
-             if (ran_answer < 0.5) {
-                var npc_answer = true
-                $npcs_all_answers[n] = npc_answer
-                }
-                else { npc_answer = false
-                        $npcs_all_answers[n] = npc_answer
-                        }
-        } //end if class=4
-        else if ($class == 3) {
-             var ran_answer = Math.floor(Math.random() * $class);
-             if (ran_answer < 0.7) {
-                var npc_answer = true
-                $npcs_all_answers[n] = npc_answer
-                }
-                else { npc_answer = false
-                        $npcs_all_answers[n] = npc_answer
-                        }
-        } //end if class=3
-        else if ($class == 2) {
-             var ran_answer = Math.floor(Math.random() * $class);
-             if (ran_answer < 1) {
-                var npc_answer = true
-                $npcs_all_answers[n] = npc_answer
-                }
-                else { npc_answer = false
-                        $npcs_all_answers[n] = npc_answer
-                        }
-        } //end if class=2
-        else if ($class == 1) {
-             var ran_answer = Math.floor(Math.random());
-             if (ran_answer < 0.86) {
-                var npc_answer = true
-                $npcs_all_answers[n] = npc_answer
-                }
-                else { npc_answer = false
-                        $npcs_all_answers[n] = npc_answer
-                        }
-        } //end if class=1
-
-    } //for loop
-    console.log($npcs_all_answers);
-    return $npcs_all_answers
 };
 
-function randomQuestion(){
-
-
-
+function randomQuestion(data){
+		
+				
+		        
 		        // console.log(data);
 		        var dataLen = Object.keys(data).length;
 		        var ran_key = Math.floor(Math.random() * dataLen);
@@ -128,11 +83,11 @@ function askAndCheckRepeat() {
 
             $('#play-it').click(function() {
                             console.log($('audio'));
-
+                            
                             $('audio')[0].play();
-
-
-          	 	 			setTimeout(function(){
+                            
+                      
+          	 	 			setTimeout(function(){	
 
             						$('audio')[0].pause();
             							alert("Audio Stop Successfully");
@@ -151,7 +106,7 @@ function askAndCheckRepeat() {
 
 
     		//paczamy czy dobrze odpowiedział
-
+   
 };
 
 function stage2() {
@@ -161,16 +116,12 @@ function stage2() {
 
 $answerButt.on('click', function(ev) {
    		// ev.preventDefault();
-
    		console.log($answerInput.val());
    		console.log(questNow['toAsk']['answer']);
    		console.log($answerInput.val() == questNow['toAsk']['answer']);
-   		npcSimulation()
    		console.log("dlugosc listy zadanych pytan :" + asked.length);
 
-
    		if ($answerInput.val() == questNow['toAsk']['answer']) {
-
 
    			$answerInput.val('');
    			// console.log('ok answer');
@@ -181,18 +132,17 @@ $answerButt.on('click', function(ev) {
    				stage2();
    			}
    			else {
-
+   		
    			askAndCheckRepeat(randomQuestion());
    			}
    		} //if answ ok
    		else {
-
    			$answerInput.val('');
    			console.log('wrong');
    			chance -= 1
    			if (chance > 1 && asked.length < 2) { //1 zla odpowiedz w stage 1
    			console.log(chance);
-
+   		
    			askAndCheckRepeat(randomQuestion());
    			}
    			else if (stage == 1 && asked.length == 2) { //przechodzi do rundy2 z 2 szansami -1z 1 db
@@ -209,9 +159,7 @@ $answerButt.on('click', function(ev) {
    		} //else - answer wrong
 
    }); //ev.list do submit
-function main() {
-
-
+function getQuestions() {
 
     $.ajax(
         {
@@ -226,19 +174,17 @@ function main() {
         		data[i] = json.results[i];
         		// console.log(data);
 
-
 			}
-			return data;
-
-			askAndCheckRepeat(randomQuestion());
-
-
-
-
+            return data;
+			//askAndCheckRepeat(randomQuestion());
 
 	 	}) //.ajax done()
 
-}; //main() - getQuestions
+}; // getQuestions
+
+
+
+//randomQuestion(data);
 
 
 
