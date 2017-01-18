@@ -1,0 +1,55 @@
+{% extends 'quiz_app/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+  <div id='studio1'>
+    <div id='sznuk'>
+      <section id='sznuk_section'>sznuk - section</section>
+    </div>
+
+    <div id='others'>
+    <section id='others_section'>reszta, inni - section</section>
+    </div>
+
+    <div id='player'>
+        tu bedzie profil gracza
+
+        <div id='points' class='hidden'>
+        tu bedą szanse, a w finale także punkty
+        </div>
+        <div id='question'> tu bedzie pytanie
+          <section id='query'>tu zadajemy pytanie - section
+            <section id='media'>
+              <div>
+              media - czyli zdjęcia lub audio do pytania
+              </div>
+            </section>
+          </section>
+          <div id='timerBar' class="progress"></div>
+        </div>
+        <div id='answer'>
+          <!-- <form action="#"  method="post"> -->
+            <label>Answer:<input id="answer-input" type='text' name='player_answer'></label>
+            <button id="answer-butt" class='btn btn-primary'>ANSWER</button>
+         <!--  </form> -->
+          <div id='comment' class='hidden'>
+            tu bedzie komentarz
+          </div>
+        </div>
+    </div>  
+  </div>
+ {% endblock %}
+
+{% block footer %}
+
+<footer>
+
+
+    <script src="{% static 'JS/app2.js' %}"></script>
+
+
+</footer>
+
+{% endblock %}
