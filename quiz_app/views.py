@@ -15,22 +15,18 @@ import random
 class Quiz(View):
 
     def get(self, request):
+        print(request)
         # sznuk = {TadeuszSznuk.objects.get(pk=1)}
         all_npcs = []
         all_npcs = NPCPlayer.objects.all()
-        print(len(all_npcs))
         npcs = []
-        print(all_npcs)
+        player = Player.objects.get(user=request.user)
         while len(npcs) < 9:
             p = random.choice(all_npcs)
             if p not in npcs:
                 npcs.append(p)
-
-        print(npcs)
-        print(npcs[1].occupation)
-        print(len(npcs))
-        player = {}
-        ctx = {'player': player, 'npcs': npcs,}
+        ctx = {'player': player, 'npcs': npcs}
+        print(ctx)
         return render(request, 'quiz_app/quiz.html', ctx)
 
 class AddPlayerUserView(View):

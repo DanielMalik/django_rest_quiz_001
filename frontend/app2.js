@@ -14,10 +14,10 @@ function randomQuestion(){
 		
 				
 		        
-		        console.log(data);
+		        // console.log(data);
 		        var dataLen = Object.keys(data).length;
 		        var ran_key = Math.floor(Math.random() * dataLen);
-		        console.log("ran key " + ran_key);
+		        // console.log("ran key " + ran_key);
 		        var toAsk = data[ran_key];
 
 		        					//okej, teraz if zeby sie pytania nie powtarzaly
@@ -35,9 +35,9 @@ function randomQuestion(){
 		        else {
 
 		        console.log(toAsk);
-		        console.log(data);
+		        // console.log(data);
 		        asked.push(ran_key);
-		        console.log(asked);
+		        // console.log(asked);
 
 		        return questNow = {'data':data, 'toAsk': toAsk, 'asked' : asked}
 				}
@@ -47,16 +47,16 @@ function askAndCheckRepeat() {
 
 	console.log("szanse: " + chance);
 	$query = $('#query');
-	console.log($query);
+	// console.log($query);
 	$media = $('#media');
-	console.log($media);
+	// console.log($media);
 	$timebelt = $('#timebelt');
 	$answerInput = $('#answer-input');
 	$answerButt = $('#answer-butt');
 			//pokazujemy typowi pytanie
 	var $thisQuestion = $("<p>");
 	$question = questNow['toAsk']['query']
-	console.log($question);
+	// console.log($question);
     $thisQuestion.html("<strong>" + $question + "</strong>");
     $query.append($thisQuestion);
     		// paczamy czy mamy media
@@ -71,7 +71,7 @@ function askAndCheckRepeat() {
             $media.append($audio);
             $play.text('PLAY');
             $media.append($play);
-            console.log($audio);
+            // console.log($audio);
             $query.append($media);
             $('#question').append($query);
 
@@ -118,8 +118,8 @@ $answerButt.on('click', function(ev) {
    		if ($answerInput.val() == questNow['toAsk']['answer']) {
 
    			$answerInput.val('');
-   			console.log('ok answer');
-   			console.log(chance);
+   			// console.log('ok answer');
+   			// console.log(chance);
 
    			if (asked.length == 2) {
    				console.log("ETAP 2");
@@ -166,9 +166,9 @@ function main() {
         function (json) {
         	for (var i = 0; i < (json.results.length); i ++) {
         		
-        		console.log(json.results[i]);
+        		// console.log(json.results[i]);
         		data[i] = json.results[i];
-        		console.log(data);
+        		// console.log(data);
         	
         	
 			}

@@ -11,11 +11,17 @@
 
     <div id='others'>
     <section id='others_section'>reszta, inni - section</section>
+
+        {% for npc in npcs %}
+            <p>{{npc.name}}</p>
+        {% endfor%}
     </div>
 
     <div id='player'>
         tu bedzie profil gracza
-
+            <h2> {{ player.user.username }} </h2>
+            <h3> {{ player.occupation }} </h3>
+            <img src="{{ STATIC_URL }}/static/media/{{player.mug_shot}} ">
         <div id='points' class='hidden'>
         tu bedą szanse, a w finale także punkty
         </div>

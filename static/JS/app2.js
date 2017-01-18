@@ -171,9 +171,9 @@ function main() {
         function (json) {
         	for (var i = 0; i < (json.results.length); i ++) {
         		
-        		console.log(json.results[i]);
+//        		console.log(json.results[i]);
         		data[i] = json.results[i];
-        		console.log(data);
+//        		console.log(data);
         	
         	
 			}

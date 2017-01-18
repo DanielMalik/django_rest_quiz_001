@@ -64,9 +64,8 @@ function askAndCheckRepeat() {
 
     	    $query.find("strong").html("");
     		console.log("czyscimy div z pytaniem");
-    		$thisQuestion.html("<strong>" + $question + "</strong>");
+            $thisQuestion.html("<strong>" + $question + "</strong>");
             $query.append($thisQuestion);
-
     		console.log("some media");
     		$media.detach();
     		$media.html("");
@@ -172,9 +171,9 @@ function main() {
         function (json) {
         	for (var i = 0; i < (json.results.length); i ++) {
         		
-        		console.log(json.results[i]);
+//        		console.log(json.results[i]);
         		data[i] = json.results[i];
-        		console.log(data);
+//        		console.log(data);
         	
         	
 			}
