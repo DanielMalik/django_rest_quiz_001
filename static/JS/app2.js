@@ -18,56 +18,65 @@ function npcSimulation() {
         $class = $npc.data("level");
         if ($class == 4) {
              var ran_answer = Math.floor(Math.random() * $class);
-             var thing = $('.chances').get(n);
-             console.log(thing);
+             var $thing = $('.chances').get(n);
+             console.log($thing);
              if (ran_answer < 0.5) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
                 }
                 else { npc_answer = false
-                        $npcs_all_answers[n] = npc_answer
+                        $npcs_all_answers[n] = npc_answer;
+
 
                         }
         } //end if class=4
         else if ($class == 3) {
              var ran_answer = Math.floor(Math.random() * $class);
-             var thing = $('.chances').get(n);
-             console.log(thing);
+             var $thing = $('.chances').get(n);
+             console.log($thing);
              if (ran_answer < 0.7) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
                 }
                 else { npc_answer = false
-                        $npcs_all_answers[n] = npc_answer
+                        $npcs_all_answers[n] = npc_answer;
+
                         }
         } //end if class=3
         else if ($class == 2) {
              var ran_answer = Math.floor(Math.random() * $class);
-             var thing = $('.chances').get(n);
-             console.log(thing);
+             var $thing = $('.chances').get(n);
+             console.log($thing);
              if (ran_answer < 1) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
                 }
                 else { npc_answer = false
-                        $npcs_all_answers[n] = npc_answer
+                        $npcs_all_answers[n] = npc_answer;
+
                         }
         } //end if class=2
         else if ($class == 1) {
              var ran_answer = Math.floor(Math.random());
-             var thing = $('.chances').get(n);
-             console.log(thing);
+             var $thing = $('.chances').get(n);
+             console.log($thing);
              if (ran_answer < 0.86) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
                 }
                 else { npc_answer = false
-                        $npcs_all_answers[n] = npc_answer
+                        $npcs_all_answers[n] = npc_answer;
+
                         }
         } //end if class=1
 
     } //for loop
     console.log($npcs_all_answers);
+    for (var n = 0; n < ($npc.length * 3); n ++) {
+        $change = $('.chances > div').get(n);
+        console.log($change);
+
+    } //second loop
     return $npcs_all_answers
 };
 
