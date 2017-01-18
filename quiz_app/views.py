@@ -7,6 +7,7 @@ from quiz_app.serializers import QuestionSerializer, NPCPlayerSerialiezer, Tadeu
 from rest_framework import generics
 from quiz_app.forms import AddPlayerUser, PlayerLogin
 from quiz_app.models import Player, NPCPlayer, TadeuszSznuk
+import random
 
 
 # Create your views here.
@@ -15,9 +16,19 @@ class Quiz(View):
 
     def get(self, request):
         # sznuk = {TadeuszSznuk.objects.get(pk=1)}
+        all_npcs = []
         all_npcs = NPCPlayer.objects.all()
-        print(all_npcs)
+        print(len(all_npcs))
         npcs = []
+        print(all_npcs)
+        while len(npcs) < 9:
+            p = random.choice(all_npcs)
+            if p not in npcs:
+                npcs.append(p)
+
+        print(npcs)
+        print(npcs[1].occupation)
+        print(len(npcs))
         player = {}
         ctx = {'player': player, 'npcs': npcs,}
         return render(request, 'quiz_app/quiz.html', ctx)

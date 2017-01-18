@@ -35,7 +35,7 @@ LEVEL = (
 
 class NPCPlayer(models.Model):
     name = models.CharField(max_length=128,)
-    mug_shot = models.ImageField(upload_to='static/npcs')
+    mug_shot = models.ImageField(upload_to='static/media')
     came_from = models.CharField(max_length=128,)
     occupation = models.CharField(max_length=128,)
     interested = models.CharField(max_length=128,)
@@ -45,9 +45,12 @@ class NPCPlayer(models.Model):
     class Meta:
         ordering = ['points']
 
+    def __str__(self):
+        return self.name
+
 class Player(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    mug_shot = models.ImageField(upload_to='static/players', null=True, blank=True)
+    mug_shot = models.ImageField(upload_to='static/media', null=True, blank=True)
     came_from = models.CharField(max_length=128, )
     occupation = models.CharField(max_length=128, )
     interested = models.CharField(max_length=128, )

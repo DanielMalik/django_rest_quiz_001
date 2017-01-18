@@ -62,6 +62,11 @@ function askAndCheckRepeat() {
     		// paczamy czy mamy media
     	if (questNow['toAsk']['media'] != null) {
 
+    	    $query.find("strong").html("");
+    		console.log("czyscimy div z pytaniem");
+    		$thisQuestion.html("<strong>" + $question + "</strong>");
+            $query.append($thisQuestion);
+
     		console.log("some media");
     		$media.detach();
     		$media.html("");
@@ -91,6 +96,7 @@ function askAndCheckRepeat() {
 
     	}	else {
     		console.log('nie ma media');
+    		$media.html("");
     		$query.detach();
     		$query.find("strong").html("");
     		$thisQuestion.html("<strong>" + $question + "</strong>");
