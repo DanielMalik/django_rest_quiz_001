@@ -11,22 +11,28 @@ main();
 
 function npcSimulation() {
 
-    var $npc = $('.npc')
-    var $npcs_all_answers = {}
+    var $npc = $('.npc');
+    var $npcs_all_answers = {};
+    console.log($npc);
     for (var n = 0; n < $npc.length; n ++) {
         $class = $npc.data("level");
         if ($class == 4) {
              var ran_answer = Math.floor(Math.random() * $class);
+             var thing = $('.chances').get(n);
+             console.log(thing);
              if (ran_answer < 0.5) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
                 }
                 else { npc_answer = false
                         $npcs_all_answers[n] = npc_answer
+
                         }
         } //end if class=4
         else if ($class == 3) {
              var ran_answer = Math.floor(Math.random() * $class);
+             var thing = $('.chances').get(n);
+             console.log(thing);
              if (ran_answer < 0.7) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
@@ -37,6 +43,8 @@ function npcSimulation() {
         } //end if class=3
         else if ($class == 2) {
              var ran_answer = Math.floor(Math.random() * $class);
+             var thing = $('.chances').get(n);
+             console.log(thing);
              if (ran_answer < 1) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
@@ -47,6 +55,8 @@ function npcSimulation() {
         } //end if class=2
         else if ($class == 1) {
              var ran_answer = Math.floor(Math.random());
+             var thing = $('.chances').get(n);
+             console.log(thing);
              if (ran_answer < 0.86) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
@@ -190,11 +200,18 @@ $answerButt.on('click', function(ev) {
    		else {
    			$answerInput.val('');
    			console.log('wrong');
+   			console.log("stage issssssssssss :" + stage);
    			chance -= 1
+   			console.log("szanseeeeeeeeeeeeeee :" + chance);
    			if (chance > 1 && asked.length < 2) { //1 zla odpowiedz w stage 1
    			console.log(chance);
 
    			askAndCheckRepeat(randomQuestion());
+   			}
+   			else if (stage == 1 && chance == 1) { //na koniec 1wszej rundy - 2 zle odp
+
+   				console.log("koniec");
+   				return false
    			}
    			else if (stage == 1 && asked.length == 2) { //przechodzi do rundy2 z 2 szansami -1z 1 db
    				console.log("ETAP 2");
@@ -202,10 +219,12 @@ $answerButt.on('click', function(ev) {
    				console.log("stage teraz bedzie :" + stage);
    				stage2();
    			}
-   			else if (stage == 1 && chance == 1) { //na koniec 1wszej rundy - 2 zle odp
+   			else if (chance == 0) { //na koniec szans
+
    				console.log("koniec");
    				return false
    			}
+
 
    		} //else - answer wrong
 
