@@ -9,10 +9,23 @@ $answerInput = $('#answer-input');
 $answerButt = $('#answer-butt');
 main();
 
+function loosers() {
+    console.log("SSSPPPRRRAAAWWWDDDZZZAAAMMM!!!!!!!!!!!!!!!!");
+    var $npc = $('.out');
+    console.log($npc.length);
+    if ($npc.length == 7) {
+        alert("finał");
+        return false
+    }
+    else {}
+}; //funkcja loosers
+
+
 function npcSimulation() {
     console.log(stage + "który stage           " + stage);
 
     var $npc = $('.npc');
+    console.log($npc);
     var $npcs_all_answers = {};
 //    console.log($npc);  //wszystkie divy
     for (var n = 0; n < $npc.length; n ++) {
@@ -21,10 +34,10 @@ function npcSimulation() {
         $class = $this_npc.data("level");
         console.log("klasa tego npc :" + $class);
         if ($class == 4) {
-             var ran_answer = Math.floor(Math.random() * $class);
+             var ran_answer = Math.random();
              var $chances_lamps = $('.chances').eq(n);
-             console.log($chances_lamps);
-             if (ran_answer < 0.1) {
+             //console.log($chances_lamps);
+             if (ran_answer < 0.9) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer;
 
@@ -33,42 +46,24 @@ function npcSimulation() {
                         $npcs_all_answers[n] = npc_answer;
                         $lamps = $chances_lamps.children();
 
-                        console.log('debugdebug');
-                        console.log($lamps.eq(0).hasClass("wrong"));
-                        console.log($lamps.eq(1).hasClass("wrong"));
-                        console.log($lamps.eq(2).hasClass("wrong"));
-
                         if ($lamps.eq(0).hasClass("wrong") == false) {
-                            $black = $lamps.eq(0);
-                            $black.addClass("wrong");
-                            console.log("tuuuuuuu       1");
+                            $lamps.eq(0).addClass("wrong");
                             }
                         else if ($lamps.eq(0).hasClass("wrong") == true && stage == 1) {
-                            console.log("który stage" + stage);
-                            $this_npc.addClass("wrong");
-                            $black = $lamps.eq(1);
-                            $black.addClass("wrong");
-                            $black = $lamps.eq(2);
-                            $black.addClass("wrong");
-                            console.log("tuuuuuuu       2");
+                            $this_npc.addClass("wrong out");
+                            $lamps.eq(1).addClass("wrong");
+                            $lamps.eq(2).addClass("wrong");
+                            loosers();
                             }
                         else if ($lamps.eq(2).hasClass("wrong") == false && $lamps.eq(1).hasClass("wrong") == false && $lamps.eq(0).hasClass("wrong") == true && stage > 1) {
-                            console.log("który stage" + stage);
-                            $black = $lamps.eq(1);
-                            $black.addClass("wrong");
-                            console.log("tuuuuuuu       3");
-                            console.log('drugi debug');
-                            console.log($lamps.eq(0).hasClass("wrong"));
-                            console.log($lamps.eq(1).hasClass("wrong"));
-                            console.log($lamps.eq(2).hasClass("wrong"));
+                            $lamps.eq(1).addClass("wrong");
+
 
                             }
                         else if($lamps.eq(0).hasClass("wrong") == true && $lamps.eq(1).hasClass("wrong") == true ) {
-                            console.log("który stage" + stage);
-                            $black = $lamps.eq(2);
-                            $black.addClass("wrong");
-                            $this_npc.addClass("wrong");
-                            console.log("tuuuuuuu       4");
+                            $lamps.eq(2).addClass("wrong");
+                            $this_npc.addClass("wrong out");
+                            loosers();
                             }
 
 //                        for (var d = 0; d < 3; d ++ ){
@@ -83,64 +78,132 @@ function npcSimulation() {
                         }
         } //end if class=4
         else if ($class == 3) {
-             var ran_answer = Math.floor(Math.random() * $class);
+             var ran_answer = Math.random();
              var $chances_lamps = $('.chances').eq(n);
-             console.log($chances_lamps);
-             if (ran_answer < 0.7) {
+             //console.log($chances_lamps);
+             if (ran_answer < 0.16) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
                 }
                 else { npc_answer = false
                         $npcs_all_answers[n] = npc_answer;
-                         for (var d = 0; d < 3; d ++ ){
-                            $lamps = $chances_lamps.children();
-                            if ($lamps.eq(d).hasClass("wrong")) {}
-                            else {
-                            $lamps.eq(d).addClass("wrong")
+                        $lamps = $chances_lamps.children();
+
+                        if ($lamps.eq(0).hasClass("wrong") == false) {
+                            $lamps.eq(0).addClass("wrong");
                             }
-                        }
+                        else if ($lamps.eq(0).hasClass("wrong") == true && stage == 1) {
+                            $this_npc.addClass("wrong out");
+                            $lamps.eq(1).addClass("wrong");
+                            $lamps.eq(2).addClass("wrong");
+                            loosers();
+                            }
+                        else if ($lamps.eq(2).hasClass("wrong") == false && $lamps.eq(1).hasClass("wrong") == false && $lamps.eq(0).hasClass("wrong") == true && stage > 1) {
+                            $lamps.eq(1).addClass("wrong");
+
+
+                            }
+                        else if($lamps.eq(0).hasClass("wrong") == true && $lamps.eq(1).hasClass("wrong") == true ) {
+                            $lamps.eq(2).addClass("wrong");
+                            $this_npc.addClass("wrong out");
+                            loosers();
+                            }
+
+//                        for (var d = 0; d < 3; d ++ ){
+//                            $lamps = $chances_lamps.children();
+//                            if ($lamps.eq(d).hasClass("wrong")) {}
+//                            else {
+//                            $lamps.eq(d).addClass("wrong")
+//                            }
+//                        } //for loop na wyczenianie szans
+//                         //$chances_lamps.addClass("wrong");
 
                         }
         } //end if class=3
         else if ($class == 2) {
-             var ran_answer = Math.floor(Math.random() * $class);
+             var ran_answer = Math.random();
              var $chances_lamps = $('.chances').eq(n);
-             console.log($chances_lamps);
-             if (ran_answer < 1) {
+             //console.log($chances_lamps);
+             if (ran_answer < 0.15) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
                 }
                 else { npc_answer = false
                         $npcs_all_answers[n] = npc_answer;
-                         for (var d = 0; d < 3; d ++ ){
-                            $lamps = $chances_lamps.children();
-                            if ($lamps.eq(d).hasClass("wrong")) {}
-                            else {
-                            $lamps.eq(d).addClass("wrong")
+                        $lamps = $chances_lamps.children();
+
+                        if ($lamps.eq(0).hasClass("wrong") == false) {
+                            $lamps.eq(0).addClass("wrong");
                             }
-                        }
+                        else if ($lamps.eq(0).hasClass("wrong") == true && stage == 1) {
+                            $this_npc.addClass("wrong out");
+                            $lamps.eq(1).addClass("wrong");
+                            $lamps.eq(2).addClass("wrong");
+                            loosers();
+                            }
+                        else if ($lamps.eq(2).hasClass("wrong") == false && $lamps.eq(1).hasClass("wrong") == false && $lamps.eq(0).hasClass("wrong") == true && stage > 1) {
+                            $lamps.eq(1).addClass("wrong");
+
+
+                            }
+                        else if($lamps.eq(0).hasClass("wrong") == true && $lamps.eq(1).hasClass("wrong") == true ) {
+                            $lamps.eq(2).addClass("wrong");
+                            $this_npc.addClass("wrong out");
+                            loosers();
+                            }
+
+//                        for (var d = 0; d < 3; d ++ ){
+//                            $lamps = $chances_lamps.children();
+//                            if ($lamps.eq(d).hasClass("wrong")) {}
+//                            else {
+//                            $lamps.eq(d).addClass("wrong")
+//                            }
+//                        } //for loop na wyczenianie szans
+//                         //$chances_lamps.addClass("wrong");
 
                         }
         } //end if class=2
         else if ($class == 1) {
-             var ran_answer = Math.floor(Math.random());
+             var ran_answer = Math.random();
              var $chances_lamps = $('.chances').eq(n);
-             console.log($chances_lamps);
-             if (ran_answer < 0.86) {
+             //console.log($chances_lamps);
+             if (ran_answer < 0.16) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
 
                 }
                 else { npc_answer = false
                         $npcs_all_answers[n] = npc_answer;
-                        for (var d = 0; d < 3; d ++ ){
-                            $lamps = $chances_lamps.children();
-                            if ($lamps.eq(d).hasClass("wrong")) {}
-                            else {
-                            $lamps.eq(d).addClass("wrong")
-                            }
-                        }
+                        $lamps = $chances_lamps.children();
 
+                        if ($lamps.eq(0).hasClass("wrong") == false) {
+                            $lamps.eq(0).addClass("wrong");
+                            }
+                        else if ($lamps.eq(0).hasClass("wrong") == true && stage == 1) {
+                            $this_npc.addClass("wrong");
+                            $lamps.eq(1).addClass("wrong");
+                            $lamps.eq(2).addClass("wrong");
+                            loosers();
+                            }
+                        else if ($lamps.eq(2).hasClass("wrong") == false && $lamps.eq(1).hasClass("wrong") == false && $lamps.eq(0).hasClass("wrong") == true && stage > 1) {
+                            $lamps.eq(1).addClass("wrong");
+
+
+                            }
+                        else if($lamps.eq(0).hasClass("wrong") == true && $lamps.eq(1).hasClass("wrong") == true ) {
+                            $lamps.eq(2).addClass("wrong");
+                            $this_npc.addClass("wrong");
+                            loosers();
+                            }
+
+//                        for (var d = 0; d < 3; d ++ ){
+//                            $lamps = $chances_lamps.children();
+//                            if ($lamps.eq(d).hasClass("wrong")) {}
+//                            else {
+//                            $lamps.eq(d).addClass("wrong")
+//                            }
+//                        } //for loop na wyczenianie szans
+//                         //$chances_lamps.addClass("wrong");
 
                         }
         } //end if class=1
@@ -254,6 +317,7 @@ function askAndCheckRepeat() {
 };
 
 function stage2() {
+    console.log("leci funkcja stage2");
 	askAndCheckRepeat(randomQuestion());
 
 };
@@ -272,7 +336,7 @@ $answerButt.on('click', function(ev) {
    			console.log('ok answer');
    			console.log(chance);
 
-   			if (asked.length == 2) {
+   			if (asked.length >= 2) {
    				console.log("ETAP 2");
    				stage = 2;
    				stage2();

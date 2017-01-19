@@ -72,3 +72,9 @@ img {
 .wrong {
     background-color: #000;
 }
+
+.out {
+margin: 9px;
+padding: 1px;
+border:  6px solid red
+}
