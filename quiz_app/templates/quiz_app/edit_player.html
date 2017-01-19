@@ -14,9 +14,9 @@
             <form action="" method="post">
 
                 {% csrf_token %}
-                {{ form_user.as_p }}
+                {{ form.as_p }}
 
-                <input type="submit" value="Register now">
+                <input type="submit" value="Edit now">
             </form>
 
             <p>
@@ -26,8 +26,9 @@
                     </strong>
                 {% endfor %}
             </p>
-
-
+          <button class="btn">
+            <a href="{% url 'quiz' %}">New Player</a>
+        </button>
 
         </div>
     </div>

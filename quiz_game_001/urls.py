@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from quiz_app.views import AddPlayerUserView, PlayerLog, Quiz, QuestionList, QuestionDetail,\
-    NPCPlayerList, NPCPlayerDetail, TadeuszSznukList, logout_view
+from quiz_app.views import EditPlayerUserView, PlayerLog, Quiz, QuestionList, QuestionDetail,\
+    NPCPlayerList, NPCPlayerDetail, TadeuszSznukList, logout_view, AddNewPlayer, End
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -28,9 +28,11 @@ urlpatterns = [
     url(r'^npcs/(?P<pk>(\d)+)', NPCPlayerDetail.as_view(), name='npcplayer-detail'),
     url(r'^sznuk/$', TadeuszSznukList.as_view(), name='tadeuszsznuk-list'),
     url(r'^logout/$', logout_view, name='site-logout'),
-    url(r'^newplayer/?$', AddPlayerUserView.as_view(), name='create-new-player'),
+    url(r'^newplayer/?$', AddNewPlayer.as_view(), name='create-new-player'),
+    url(r'^editplayer/?$', EditPlayerUserView.as_view(), name='edit-player'),
     url(r'^accounts/login/?$', PlayerLog.as_view(), name='player-login'),
     url(r'^quiz/$', Quiz.as_view(), name='quiz'),
+    url(r'^end/$', End.as_view(), name='end'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -220,6 +220,7 @@ $answerButt.on('click', function(ev) {
    			else if (stage == 1 && chance == 1) { //na koniec 1wszej rundy - 2 zle odp
 
    				console.log("koniec");
+   				setTimeout(function(){ window.location.replace("http://127.0.0.1:8000/end/"); }, delay);
    				return false
    			}
    			else if (stage == 1 && asked.length == 2) { //przechodzi do rundy2 z 2 szansami -1z 1 db
@@ -231,6 +232,9 @@ $answerButt.on('click', function(ev) {
    			else if (chance == 0) { //na koniec szans
 
    				console.log("koniec");
+   				var delay = 5000;
+                setTimeout(function(){ window.location.replace("http://127.0.0.1:8000/end/"); }, delay);
+
    				return false
    			}
 

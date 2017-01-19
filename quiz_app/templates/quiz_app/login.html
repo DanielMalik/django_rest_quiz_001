@@ -18,7 +18,9 @@
                 {% csrf_token %}
                 {{ form }}
 
-                <input type="submit" value="Login">
+                <button class="btn">
+                    <input type="submit" value="Login">
+                </button>
             </form>
 
             <p>
@@ -29,7 +31,9 @@
                 {% endfor %}
             </p>
 
-
+        <button class="btn">
+            <a href="{% url 'create-new-player' %}">New Player</a>
+        </button>
 
         </div>
     </div>

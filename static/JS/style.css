@@ -31,6 +31,12 @@ img {
     width: 100px;
     height: 100px;
 }
+
+.bigimg{
+    width: 300px;
+    height: 300px;
+}
+
 .others {
     width: 100%;}
 

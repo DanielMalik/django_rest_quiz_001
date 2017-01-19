@@ -1,0 +1,51 @@
+{% extends 'quiz_app/base.html' %}
+
+{% block title %}
+    CREATE NEW PLAYER
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-info">
+        <div class="panel-heading">
+           create new player - template
+        </div>
+        <div class="panel-body">
+            <h1>KONIEC GRY</h1>
+            <h3>pani Sylwia niesie cukierki...</h3>
+            <img class='bigimg' src="{{ STATIC_URL }}/static/media/sylwia.jpg"
+            <h2> {{ player.user.username }} </h2>
+            <h3> {{ player.occupation }} </h3>
+            <img src="{{ STATIC_URL }}/static/media/{{player.mug_shot}} ">
+            <button class="btn">
+                <a href="{% url 'create-new-player' %}">New Player</a>
+            </button>
+            <button class="btn">
+                <a href="{% url 'site-logout' %}">logout</a>
+            </button>
+            <button class="btn">
+                <a href="{% url 'quiz' %}">New Game</a>
+            </button>
+            <button class="btn">
+                <a href="{% url 'edit-player' %}">Edit Player</a>
+            </button>
+
+        </div>
+    </div>
+{% endblock %}
+<!--{% block content_js %}-->
+    <!--<script type="text/javascript">-->
+        <!--$(document).ready(function () {-->
+            <!--try {-->
+                <!--$('#bands-table').DataTable({-->
+                    <!--"bFilter": true,-->
+                    <!--"sDom": "lfrtip"-->
+                <!--});-->
+            <!--}-->
+            <!--catch (err) {-->
+            <!--}-->
+        <!--});-->
+    <!--</script>-->
+<!--{% endblock %}-->
+
+
+
