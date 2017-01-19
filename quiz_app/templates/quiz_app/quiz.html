@@ -15,6 +15,7 @@
         {% for npc in npcs %}
         <div id="{{npc.id}}" class="npc" data-level="{{ npc.level }}">
             <p>{{npc.name}}</p>
+            <img src="{{ npc.mug_shot.url }} ">
 
             <div class="chances">
                 <div class="chance-lamp" data-id="chance_1"></div>

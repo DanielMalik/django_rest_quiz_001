@@ -22,12 +22,12 @@ class PlayerAdmin(admin.ModelAdmin):
     list_display = ('user', 'mug', 'points', 'came_from', 'occupation', 'interested', 'mug_shot')
 
     def mug(self, obj):
-        return "<img src ='/{}' width='150' height='150' >".format(obj.mug_shot)
+        return "<img src='/{}' width='150' height='150' >".format(obj.mug_shot)
 
     mug.allow_tags = True
 
 @admin.register(TadeuszSznuk)
-class PlayerAdmin(admin.ModelAdmin):
+class TadzioAdmin(admin.ModelAdmin):
     list_display = ('user', 'pic', 'avatar')
 
     def pic(self, obj):

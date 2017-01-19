@@ -34,6 +34,5 @@ urlpatterns = [
     url(r'^quiz/$', Quiz.as_view(), name='quiz'),
     url(r'^end/$', End.as_view(), name='end'),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

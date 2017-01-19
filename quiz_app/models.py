@@ -24,7 +24,7 @@ class Question(models.Model):
     comment_wrong = models.TextField(max_length=512, null=True)
     category = models.SmallIntegerField(choices=CATEGORY)
     grade = models.SmallIntegerField(choices=GRADE, default=0)
-    media = models.FileField(upload_to='static/media', null=True, blank=True)
+    media = models.FileField(upload_to='audio', null=True, blank=True)
 
 LEVEL = (
     (1, 'gump'),
@@ -35,7 +35,7 @@ LEVEL = (
 
 class NPCPlayer(models.Model):
     name = models.CharField(max_length=128,)
-    mug_shot = models.ImageField(upload_to='static/npcs')
+    mug_shot = models.ImageField(upload_to='npcs')
     came_from = models.CharField(max_length=128,)
     occupation = models.CharField(max_length=128,)
     interested = models.CharField(max_length=128,)
@@ -50,7 +50,7 @@ class NPCPlayer(models.Model):
 
 class Player(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    mug_shot = models.ImageField(upload_to='static/media/players', null=True, blank=True)
+    mug_shot = models.ImageField(upload_to='players', null=True, blank=True)
     came_from = models.CharField(max_length=128, )
     occupation = models.CharField(max_length=128, )
     interested = models.CharField(max_length=128, )
@@ -64,5 +64,5 @@ class Player(models.Model):
 
 class TadeuszSznuk(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(upload_to='static/media')
+    avatar = models.ImageField(upload_to='npcs')
 

@@ -142,14 +142,19 @@ class PlayerLog(View):
                                 password=data['password'])
             print(user)
             if user is not None:
-                print('ok')
+
                 login(request, user)
+                print('ok')
                 return redirect('quiz')
 
             else:
-                print("k.o.")
+
                 form = PlayerLogin()
+                print("k.o.")
                 return render(request, 'quiz_app/login.html', {'form': form})
+        else:
+            form.add_error(None, "ERROR")
+            return render(request, "quiz_app/edit_player.html", {"form": form})
 
 def logout_view(request, next_page='/quiz'):
     logout(request)
@@ -158,7 +163,7 @@ def logout_view(request, next_page='/quiz'):
 
 # REST server views
 
-class QuestionList(PermissionRequiredMixin, generics.ListCreateAPIView):
+class QuestionList(generics.ListCreateAPIView):
     permission_required = 'add_question'
     # permission_required = 'change_question'
     # permission_required = 'delete_question'
