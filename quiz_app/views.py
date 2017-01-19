@@ -3,11 +3,11 @@ from django.views import View
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from quiz_app.models import Question, NPCPlayer, TadeuszSznuk
+
 from quiz_app.serializers import QuestionSerializer, NPCPlayerSerialiezer, TadeuszSznukSerialiezer
 from rest_framework import generics
 from quiz_app.forms import EditPlayerUser, PlayerLogin
-from quiz_app.models import Player, NPCPlayer, TadeuszSznuk
+from quiz_app.models import Question, Player, NPCPlayer, TadeuszSznuk
 import random
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 
@@ -24,8 +24,8 @@ class End(View):
             if player is None:
                 return redirect('player-login')
             else:
-
-                ctx = {'player': player}
+                sznuk = TadeuszSznuk.objects.get(pk=1)
+                ctx = {'player': player, 'sznuk': sznuk}
                 return render(request, 'quiz_app/end.html', ctx)
 
 

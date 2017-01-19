@@ -65,4 +65,5 @@ class Player(models.Model):
 class TadeuszSznuk(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to='npcs')
+    the_girl = models.ImageField(upload_to='npcs', null=True, blank=True)
 
