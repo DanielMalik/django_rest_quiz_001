@@ -10,6 +10,8 @@ from quiz_app.forms import EditPlayerUser, PlayerLogin
 from quiz_app.models import Question, Player, NPCPlayer, TadeuszSznuk
 import random
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
 
 
 # Create your views here.
@@ -82,7 +84,7 @@ class EditPlayerUserView(LoginRequiredMixin, View):
         return render(request, 'quiz_app/edit_player.html', {'form': form})
 
     def post(self, request):
-        form = EditPlayerUser(request.POST)
+        form = EditPlayerUser(request.POST, request.FILES)
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
@@ -165,7 +167,7 @@ def logout_view(request, next_page='/quiz'):
 # REST server views
 
 class QuestionList(generics.ListCreateAPIView):
-    permission_required = 'add_question'
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     # permission_required = 'change_question'
     # permission_required = 'delete_question'
     queryset = Question.objects.all()

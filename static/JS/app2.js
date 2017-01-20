@@ -6,13 +6,14 @@ data = {};
 asked = []
 chance = 3
 
+
 $answerInput = $('#answer-input');
 $answerButt = $('#answer-butt');
 main();
 
 function stage3() {
     console.log("ETAP 3");
-    chance = 3
+
     $npc = $('.npc').not('.hidden');
     console.log($npc);
     askAndCheckRepeat(randomQuestion());
@@ -33,6 +34,7 @@ function loosers() {
 //        var delay = 2000;
 //        setTimeout(function(){ window.location.replace("http://127.0.0.1:8000/"); }, delay);
 //        return false
+        chance = 3;
         stage3();
         }
     else {}
@@ -238,10 +240,11 @@ function randomQuestion(){
 //		        console.log("ran key " + ran_key);
 		        var toAsk = data[ran_key];
 
-		        					//okej, teraz if zeby sie pytania nie powtarzaly
+		        					//if zeby sie pytania nie powtarzaly
 
 		        if ($.inArray(ran_key, asked) != -1) {
-		        	console.log('wyjebka na losowaniu');
+		        	console.log('again');
+		        	                // if na koniec pytan
 		        	if (dataLen == asked.length) {
 		        		alert("nie ma wiecej pytan");
 		        		return false
@@ -350,6 +353,7 @@ $answerButt.on('click', function(ev) {
 //   			console.log(chance);
             if (stage == 3) {
    			    console.log("ETAP 3 init");
+
    			    stage3();
    			}
 
@@ -358,10 +362,7 @@ $answerButt.on('click', function(ev) {
    				stage = 2;
    				stage2();
    			}
-   			if (stage == 3) {
-   			    console.log("ETAP 3 init");
-   			    stage3();
-   			}
+
    			else {
 
    			askAndCheckRepeat(randomQuestion());
