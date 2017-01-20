@@ -55,7 +55,7 @@ function npcSimulation() {
              var ran_answer = Math.random();
              var $chances_lamps = $('.chances').eq(n);
              //console.log($chances_lamps);
-             if (ran_answer < 0.9) {
+             if (ran_answer < 0.79) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer;
 
@@ -283,7 +283,7 @@ function askAndCheckRepeat() {
 
     	    $query.find("strong").html("");
 //    		console.log("czyscimy div z pytaniem");
-            $thisQuestion.html("<h1><strong>" + $question + "</strong></h1><p>" + $category + "</p>");
+            $thisQuestion.html("<h1><strong>" + $question + "</strong></h1>");
             $query.append($thisQuestion);
     		console.log("some media");
     		$media.detach();
@@ -307,8 +307,8 @@ function askAndCheckRepeat() {
           	 	 			setTimeout(function(){
 
             						$('audio')[0].pause();
-            							alert("Audio Stop Successfully");
-        							}, 15000);
+//            							alert("Audio Stop Successfully");
+        							}, 20000);
 
             	 });
 
@@ -318,7 +318,7 @@ function askAndCheckRepeat() {
     		$media.html("");
     		$query.detach();
     		$query.find("strong").html("");
-    		$thisQuestion.html("<h1><strong>" + $question + "</strong></h1><p>" + $category + "</p>");
+    		$thisQuestion.html("<h1><strong>" + $question + "</strong></h1>");
 
     		$query.append($thisQuestion);
     		$('#question').append($query);
