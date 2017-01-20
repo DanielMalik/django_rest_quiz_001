@@ -33,6 +33,7 @@ class Quiz(View):
 
     def get(self, request):
         print(request.user)
+        sznuk = TadeuszSznuk.objects.get(pk=1)
         if request.user.is_anonymous():
             return redirect('player-login')
         else:
@@ -49,7 +50,7 @@ class Quiz(View):
                     p = random.choice(all_npcs)
                     if p not in npcs:
                         npcs.append(p)
-                ctx = {'player': player, 'npcs': npcs}
+                ctx = {'player': player, 'npcs': npcs, 'sznuk': sznuk}
                 print(ctx)
                 return render(request, 'quiz_app/quiz.html', ctx)
 

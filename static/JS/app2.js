@@ -274,6 +274,7 @@ function askAndCheckRepeat() {
 			//pokazujemy typowi pytanie
 	var $thisQuestion = $("<p>");
 	$question = questNow['toAsk']['query']
+	$category = questNow['toAsk']['category']
 //	console.log($question);
     $thisQuestion.html("<strong>" + $question + "</strong>");
     $query.append($thisQuestion);
@@ -282,7 +283,7 @@ function askAndCheckRepeat() {
 
     	    $query.find("strong").html("");
 //    		console.log("czyscimy div z pytaniem");
-            $thisQuestion.html("<strong>" + $question + "</strong>");
+            $thisQuestion.html("<h1><strong>" + $question + "</strong></h1><p>" + $category + "</p>");
             $query.append($thisQuestion);
     		console.log("some media");
     		$media.detach();
@@ -311,12 +312,14 @@ function askAndCheckRepeat() {
 
             	 });
 
-    	}	else {
+    	}
+    	else {
     		console.log('nie ma media');
     		$media.html("");
     		$query.detach();
     		$query.find("strong").html("");
-    		$thisQuestion.html("<strong>" + $question + "</strong>");
+    		$thisQuestion.html("<h1><strong>" + $question + "</strong></h1><p>" + $category + "</p>");
+
     		$query.append($thisQuestion);
     		$('#question').append($query);
     	}

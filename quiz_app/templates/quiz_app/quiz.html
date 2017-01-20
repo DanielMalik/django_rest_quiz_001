@@ -5,12 +5,11 @@
 {% block content %}
 
   <div id='studio1'>
-    <div id='sznuk'>
-      <section id='sznuk_section'>sznuk - section</section>
-    </div>
 
     <div id='others'>
-    <section id='others_section'>reszta, inni - section</section>
+    <section id='others_section'>
+        <!--reszta, inni - section-->
+
 
         {% for npc in npcs %}
         <div id="{{npc.id}}" class="npc" data-level="{{ npc.level }}">
@@ -25,33 +24,40 @@
 
         </div>
         {% endfor%}
+    </section>
     </div>
-
-    <div id='player'>
-        tu bedzie profil gracza
-            <h2> {{ player.user.username }} </h2>
-            <h3> {{ player.occupation }} </h3>
+      <div id='sznuk'>
+      <section id='sznuk_section'>sznuk - section</section>
+        <img class="bigimg" src="{{ sznuk.avatar.url }}">
+      </div>
+      <div id='player'>
+        <!--tu bedzie profil gracza-->
+            <h3> {{ player.user.username }} </h3>
+            <h4> {{ player.occupation }} </h4>
             <img src="{{ STATIC_URL }}/static/media/{{player.mug_shot}} ">
-        <div class="chances-player">
-            <div class="chance-lamp-player" data-id="chance_1"></div>
-            <div class="chance-lamp-player" data-id="chance_2"></div>
-            <div class="chance-lamp-player" data-id="chance_3"></div>
-        </div>
-         <button class="btn">
+          <button class="btn">
             <a href="{% url 'edit-player' %}">Edit Player</a>
          </button>
          <button class="btn">
             <a href="{% url 'site-logout' %}">Logout</a>
          </button>
-        <div id='question'> tu bedzie pytanie
-          <section id='query'>tu zadajemy pytanie - section
+        <div class="chances-player">
+            <div class="chance-lamp-player" data-id="chance_1"></div>
+            <div class="chance-lamp-player" data-id="chance_2"></div>
+            <div class="chance-lamp-player" data-id="chance_3"></div>
+        </div>
+
+        <div id='question'>
+            <!--tu bedzie pytanie-->
+          <section id='query'>
+              <!--tu zadajemy pytanie - section-->
             <section id='media'>
               <div>
-              media - czyli zdjęcia lub audio do pytania
+              <!--media - czyli zdjęcia lub audio do pytania-->
               </div>
             </section>
           </section>
-          <div id='timerBar' class="progress"></div>
+          <!--<div id='timerBar' class="progress"></div>-->
         </div>
         <div id='answer'>
           <!-- <form action="#"  method="post"> -->
@@ -59,10 +65,12 @@
             <button id="answer-butt" class='btn btn-primary'>ANSWER</button>
          <!--  </form> -->
           <div id='comment' class='hidden'>
-            tu bedzie komentarz
+            <!--tu bedzie komentarz-->
           </div>
+
         </div>
-    </div>  
+
+    </div>
   </div>
  {% endblock %}
 
