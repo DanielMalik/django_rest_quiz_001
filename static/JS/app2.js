@@ -238,7 +238,7 @@ function randomQuestion(){
 		        var dataLen = Object.keys(data).length;
 		        var ran_key = Math.floor(Math.random() * dataLen);
 //		        console.log("ran key " + ran_key);
-		        var toAsk = data[ran_key];
+//		        var toAsk = data[ran_key];
 
 		        					//if zeby sie pytania nie powtarzaly
 
@@ -254,7 +254,7 @@ function randomQuestion(){
 		        }
 		        }
 		        else {
-
+                var toAsk = data[ran_key];
 		        console.log(toAsk);
 //		        console.log(data);
 		        asked.push(ran_key);
