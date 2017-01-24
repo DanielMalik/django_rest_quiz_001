@@ -27,17 +27,25 @@ function loosers() {
 
         for (var t =0; t < 7; t++) {
             $npc.eq(t).addClass("hidden");
-            stage=3;
+            //stage=3;
+            stage = 3;
+            chance = 3;
+            console.log("Teraz nadaje 3 runde");
 
             }
 //        alert("finał");
 //        var delay = 2000;
 //        setTimeout(function(){ window.location.replace("http://127.0.0.1:8000/"); }, delay);
 //        return false
-        chance = 3;
-        stage3();
+       // chance = 3;
+        if (stage == 2) {
+//            stage = 3;
+//            chance = 3;
+            stage3();
         }
+
     else {}
+    }
 }; //funkcja loosers
 
 
@@ -254,6 +262,7 @@ function randomQuestion(){
 		        }
 		        }
 		        else {
+		        console.log("TYYYYLLLLLLLLLKO RAZZZZZZZZZZZ");
                 var toAsk = data[ran_key];
 		        console.log(toAsk);
 //		        console.log(data);
@@ -355,11 +364,12 @@ $answerButt.on('click', function(ev) {
    			    console.log("ETAP 3 init");
 
    			    stage3();
+   			    return false
    			}
 
    			if (asked.length >= 2) {
    				console.log("ETAP 2");
-   				stage = 2;
+   				stage = 2; // niedobrze tu jest, bo z rundy 3 wraca do drugiej
    				stage2();
    			}
 
@@ -384,11 +394,13 @@ $answerButt.on('click', function(ev) {
    			else if (stage == 1 && chance == 1) { //na koniec 1wszej rundy - 2 zle odp
 
    				console.log("koniec");
+   				var delay = 5000;
    				setTimeout(function(){ window.location.replace("http://127.0.0.1:8000/end/"); }, delay);
    				return false
    			}
    			else if (stage == 1 && asked.length == 2) { //przechodzi do rundy2 z 2 szansami -1z 1 db
    				console.log("ETAP 2");
+   				console.log(chance);
    				stage = 2;
 //   				console.log("stage teraz bedzie :" + stage);
    				stage2();
@@ -397,6 +409,27 @@ $answerButt.on('click', function(ev) {
 
    				console.log("koniec");
    				var delay = 5000;
+                setTimeout(function(){ window.location.replace("http://127.0.0.1:8000/end/"); }, delay);
+
+   				return false
+   			}
+   			else if (stage == 3 && chance == 3){
+   			    console.log("wrong pierwsza w finale");
+   			    chance -= 1;
+   			    console.log(chance);
+   			    stage3();
+   			}
+   			else if (stage == 3 && chance == 2){
+   			    console.log("wrong druga w finale");
+   			    chance -= 1;
+   			    console.log(chance);
+   			    stage3();
+   			}
+   			else if (stage == 3 && chance == 1){
+   			    console.log("wrong ostatnia w finale - wypad");
+   			    chance -= 1;
+   			    console.log(chance);
+   			    var delay = 5000;
                 setTimeout(function(){ window.location.replace("http://127.0.0.1:8000/end/"); }, delay);
 
    				return false
@@ -428,6 +461,7 @@ function main() {
 
 
 			askAndCheckRepeat(randomQuestion());
+
 
 
 

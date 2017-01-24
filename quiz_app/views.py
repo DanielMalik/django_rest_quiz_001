@@ -5,7 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 
 from quiz_app.serializers import QuestionSerializer, NPCPlayerSerialiezer, TadeuszSznukSerialiezer
-from rest_framework import generics
+from rest_framework import generics, mixins
+
 from quiz_app.forms import EditPlayerUser, PlayerLogin
 from quiz_app.models import Question, Player, NPCPlayer, TadeuszSznuk
 import random
@@ -31,7 +32,7 @@ class End(View):
                 return render(request, 'quiz_app/end.html', ctx)
 
 
-class Quiz(View):
+class Quiz(LoginRequiredMixin, View):
 
     def get(self, request):
         print(request.user)
@@ -166,7 +167,7 @@ def logout_view(request, next_page='/quiz'):
 
 # REST server views
 
-class QuestionList(generics.ListCreateAPIView):
+class QuestionList(generics.ListAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     # permission_required = 'change_question'
     # permission_required = 'delete_question'
@@ -204,3 +205,5 @@ class TadeuszSznukList(PermissionRequiredMixin, generics.ListCreateAPIView):
     # permission_required = 'delete_tadeuszsznuk'
     queryset = TadeuszSznuk.objects.all()
     serializer_class = TadeuszSznukSerialiezer
+
+

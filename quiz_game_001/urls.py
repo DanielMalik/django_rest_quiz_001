@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^accounts/login/?$', PlayerLog.as_view(), name='player-login'),
     url(r'^quiz/$', Quiz.as_view(), name='quiz'),
     url(r'^end/$', End.as_view(), name='end'),
+
 ]
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
