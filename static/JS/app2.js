@@ -13,6 +13,7 @@ main();
 
 function stage3() {
     console.log("ETAP 3");
+    alert("ST 3 alert");
 
     $npc = $('.npc').not('.hidden');
     console.log($npc);
@@ -20,28 +21,25 @@ function stage3() {
 }
 
 function loosers() {
-    console.log("SSSPPPRRRAAAWWWDDDZZZAAAMMM!!!!!!!!!!!!!!!!");
+    console.log("loosers function initialized");
     var $npc = $('.out');
-//    console.log($npc.length);
     if ($npc.length == 7) {
 
         for (var t =0; t < 7; t++) {
             $npc.eq(t).addClass("hidden");
-            //stage=3;
-            stage = 3;
-            chance = 3;
-            console.log("Teraz nadaje 3 runde");
+            console.log("npcs loosig chances");
 
             }
-//        alert("finał");
-//        var delay = 2000;
-//        setTimeout(function(){ window.location.replace("http://127.0.0.1:8000/"); }, delay);
-//        return false
-       // chance = 3;
+
         if (stage == 2) {
-//            stage = 3;
-//            chance = 3;
+            $('.chance-lamp-player').eq(0).removeClass('wrong');
+            $('.chance-lamp-player').eq(1).removeClass('wrong');
+            $('.chance-lamp-player').eq(2).removeClass('wrong');
+            stage = 3;
+            chance = 4;
+            alert("looosers  HACKED chances=4    call stage 3 line 46");
             stage3();
+            return false
         }
 
     else {}
@@ -50,25 +48,21 @@ function loosers() {
 
 
 function npcSimulation() {
-//    console.log(stage + "który stage           " + stage);
 
     var $npc = $('.npc');
-//    console.log($npc);
     var $npcs_all_answers = {};
-//    console.log($npc);  //wszystkie divy
     for (var n = 0; n < $npc.length; n ++) {
         $this_npc = $npc.eq(n);
-//        console.log($this_npc)
+
         $class = $this_npc.data("level");
-//        console.log("klasa tego npc :" + $class);
+
         if ($class == 4) {
              var ran_answer = Math.random();
              var $chances_lamps = $('.chances').eq(n);
-             //console.log($chances_lamps);
+
              if (ran_answer < 0.79) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer;
-
                 }
                 else { npc_answer = false
                         $npcs_all_answers[n] = npc_answer;
@@ -85,8 +79,6 @@ function npcSimulation() {
                             }
                         else if ($lamps.eq(2).hasClass("wrong") == false && $lamps.eq(1).hasClass("wrong") == false && $lamps.eq(0).hasClass("wrong") == true && stage > 1) {
                             $lamps.eq(1).addClass("wrong");
-
-
                             }
                         else if($lamps.eq(0).hasClass("wrong") == true && $lamps.eq(1).hasClass("wrong") == true ) {
                             $lamps.eq(2).addClass("wrong");
@@ -100,7 +92,7 @@ function npcSimulation() {
         else if ($class == 3) {
              var ran_answer = Math.random();
              var $chances_lamps = $('.chances').eq(n);
-             //console.log($chances_lamps);
+
              if (ran_answer < 0.26) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
@@ -120,8 +112,6 @@ function npcSimulation() {
                             }
                         else if ($lamps.eq(2).hasClass("wrong") == false && $lamps.eq(1).hasClass("wrong") == false && $lamps.eq(0).hasClass("wrong") == true && stage > 1) {
                             $lamps.eq(1).addClass("wrong");
-
-
                             }
                         else if($lamps.eq(0).hasClass("wrong") == true && $lamps.eq(1).hasClass("wrong") == true ) {
                             $lamps.eq(2).addClass("wrong");
@@ -129,21 +119,12 @@ function npcSimulation() {
                             loosers();
                             }
 
-//                        for (var d = 0; d < 3; d ++ ){
-//                            $lamps = $chances_lamps.children();
-//                            if ($lamps.eq(d).hasClass("wrong")) {}
-//                            else {
-//                            $lamps.eq(d).addClass("wrong")
-//                            }
-//                        } //for loop na wyczenianie szans
-//                         //$chances_lamps.addClass("wrong");
-
                         }
         } //end if class=3
         else if ($class == 2) {
              var ran_answer = Math.random();
              var $chances_lamps = $('.chances').eq(n);
-             //console.log($chances_lamps);
+
              if (ran_answer < 0.15) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
@@ -163,8 +144,6 @@ function npcSimulation() {
                             }
                         else if ($lamps.eq(2).hasClass("wrong") == false && $lamps.eq(1).hasClass("wrong") == false && $lamps.eq(0).hasClass("wrong") == true && stage > 1) {
                             $lamps.eq(1).addClass("wrong");
-
-
                             }
                         else if($lamps.eq(0).hasClass("wrong") == true && $lamps.eq(1).hasClass("wrong") == true ) {
                             $lamps.eq(2).addClass("wrong");
@@ -172,21 +151,11 @@ function npcSimulation() {
                             loosers();
                             }
 
-//                        for (var d = 0; d < 3; d ++ ){
-//                            $lamps = $chances_lamps.children();
-//                            if ($lamps.eq(d).hasClass("wrong")) {}
-//                            else {
-//                            $lamps.eq(d).addClass("wrong")
-//                            }
-//                        } //for loop na wyczenianie szans
-//                         //$chances_lamps.addClass("wrong");
-
                         }
         } //end if class=2
         else if ($class == 1) {
              var ran_answer = Math.random();
              var $chances_lamps = $('.chances').eq(n);
-             //console.log($chances_lamps);
              if (ran_answer < 0.1) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
@@ -207,8 +176,6 @@ function npcSimulation() {
                             }
                         else if ($lamps.eq(2).hasClass("wrong") == false && $lamps.eq(1).hasClass("wrong") == false && $lamps.eq(0).hasClass("wrong") == true && stage > 1) {
                             $lamps.eq(1).addClass("wrong");
-
-
                             }
                         else if($lamps.eq(0).hasClass("wrong") == true && $lamps.eq(1).hasClass("wrong") == true ) {
                             $lamps.eq(2).addClass("wrong");
@@ -216,25 +183,13 @@ function npcSimulation() {
                             loosers();
                             }
 
-//                        for (var d = 0; d < 3; d ++ ){
-//                            $lamps = $chances_lamps.children();
-//                            if ($lamps.eq(d).hasClass("wrong")) {}
-//                            else {
-//                            $lamps.eq(d).addClass("wrong")
-//                            }
-//                        } //for loop na wyczenianie szans
-//                         //$chances_lamps.addClass("wrong");
 
                         }
         } //end if class=1
 
     } //for loop
+    console.log("ALL npcs answers :");
     console.log($npcs_all_answers);
-//    for (var n = 0; n < ($npc.length * 3); n ++) {
-//        $change = $('.chances > div').get(n);
-//        console.log($change);
-//
-//    } //second loop
     return $npcs_all_answers
 };
 
@@ -254,7 +209,7 @@ function randomQuestion(){
 		        	console.log('again');
 		        	                // if na koniec pytan
 		        	if (dataLen == asked.length) {
-		        		alert("nie ma wiecej pytan");
+		        		alert("SZNUK: nie mam wiecej pytan");
 		        		return false
 		        	}
 		        	else {
@@ -262,10 +217,10 @@ function randomQuestion(){
 		        }
 		        }
 		        else {
-		        console.log("TYYYYLLLLLLLLLKO RAZZZZZZZZZZZ");
+		        console.log("RANDOM QUESTION SELECT");
                 var toAsk = data[ran_key];
 		        console.log(toAsk);
-//		        console.log(data);
+
 		        asked.push(ran_key);
 		        console.log(asked);
 
@@ -275,26 +230,23 @@ function randomQuestion(){
 
 function askAndCheckRepeat() {
 
-	console.log("szanse: " + chance);
+	console.log("function aACR()    szanse: " + chance);
 	$query = $('#query');
-//	console.log($query);
 	$media = $('#media');
-//	console.log($media);
 	$timebelt = $('#timebelt');
 	$answerInput = $('#answer-input');
 	$answerButt = $('#answer-butt');
-			//pokazujemy typowi pytanie
+			//show question to player
 	var $thisQuestion = $("<p>");
 	$question = questNow['toAsk']['query']
 	$category = questNow['toAsk']['category']
-//	console.log($question);
     $thisQuestion.html("<strong>" + $question + "</strong>");
     $query.append($thisQuestion);
-    		// paczamy czy mamy media
+    		// if there is any media in question - show it
     	if (questNow['toAsk']['media'] != null) {
 
-    	    $query.find("strong").html("");
-//    		console.log("czyscimy div z pytaniem");
+    	    $query.find("strong").html(""); //clear input
+
             $thisQuestion.html("<h1><strong>" + $question + "</strong></h1>");
             $query.append($thisQuestion);
     		console.log("some media");
@@ -306,38 +258,32 @@ function askAndCheckRepeat() {
             $media.append($audio);
             $play.text('PLAY');
             $media.append($play);
-//            console.log($audio);
+
             $query.append($media);
             $('#question').append($query);
 
             $('#play-it').click(function() {
-//                            console.log($('audio'));
 
-                            $('audio')[0].play()
-
+                            $('audio')[0].play();
 
           	 	 			setTimeout(function(){
 
             						$('audio')[0].pause();
-//            							alert("Audio Stop Successfully");
         							}, 20000);
 
             	 });  //click play it
 
     	}
     	else {
-    		console.log('nie ma media');
+    		console.log('there is no media');
     		$media.html("");
     		$query.detach();
-    		$query.find("strong").html("");
+    		$query.find("strong").html(""); //clear input
     		$thisQuestion.html("<h1><strong>" + $question + "</strong></h1>");
 
     		$query.append($thisQuestion);
     		$('#question').append($query);
     	}
-
-
-    		//paczamy czy dobrze odpowiedział
 
 };
 
@@ -358,21 +304,31 @@ $answerButt.on('click', function(ev) {
 
    			$answerInput.val('');
             if (stage == 3) {
-   			    console.log("ETAP 3 init");
-
+   			    console.log("ETAP 3 good answer initializing: stage3() ");
+                alert("GOOD ANSWER    will call stage 3 line 355");
    			    stage3();
    			    return false
    			}
 
-   			else if (asked.length == 2) {
+   			else if ( stage == 1 && asked.length == 2) {
    				console.log("ETAP 2");
+   				console.log("ETAP 1 at least 1 good answer initializing: stage2() ");
    				stage = 2; // niedobrze tu jest, bo z rundy 3 wraca do drugiej
    				stage2();
+   				return false
+   			}
+
+            else if (stage == 2) {
+                console.log("ETAP 2 good answer initializing: stage2() ");
+                stage2();
+                return false
+
    			}
 
    			else if (stage == 1) {
 
-   			askAndCheckRepeat(randomQuestion());
+   			    askAndCheckRepeat(randomQuestion());
+   			    return false
    			}
    		}
 // now it handles WRONG ANSWERS
@@ -380,29 +336,39 @@ $answerButt.on('click', function(ev) {
    			$answerInput.val('');
    			console.log('wrong');
    			console.log('BEFORE IF in wrong handle .... chances:' + chance);
-   			chance -= 1
-   			var lamp_shut_id = (chance);
-   			$('.chance-lamp-player').eq(lamp_shut_id).addClass('wrong');
+
   			console.log("1st IF  ...  chances left :" + chance);
-   			if (chance > 1 && asked.length < 2) { //1st wrong answer in STAGE 1
 
-   			askAndCheckRepeat(randomQuestion());
-   			}
-
-   			else if (stage == 1 && chance == 1) { //2nd wrong answer in STAGE 1 - GAMEOVER
-                console.log("2nd IF  ...  chances left :" + chance);
-   				alert("game over");
-   				var delay = 5000;
-   				setTimeout(function(){ window.location.replace("http://127.0.0.1:8000/end/"); }, delay);
-   				return false
-   			}
-   			else if (stage == 1 && asked.length == 2) { //at least one good answer in stage 1 - promotion to STAGE 2
+   			if (stage == 1 && asked.length == 2 && chance == 3) { //at least one good answer in stage 1 - promotion to STAGE 2
    				alert("ETAP 2");
+   				chance -= 1;
+   				$('.chance-lamp-player').eq(0).addClass('wrong');
    				console.log("3rd IF  ...  chances left :" + chance);
    				stage = 2;
    				stage2();
+
+   				return false
    			}
-   			else if (chance == 0 && stage == 2) { //3rd wrong answer in STAGE2 - GAMEOVER
+   			else if (stage == 2 && chance == 3) { //1st wrong answer STAGE 2
+   				chance -= 1;
+   				$('.chance-lamp-player').eq(0).addClass('wrong');
+   				console.log("4th IF ST2 CH3 ...  chances left :" + chance);
+   				stage = 2;
+   				stage2();
+
+   				return false
+   			}
+   			else if (stage == 2 && chance == 2) { // STAGE 2
+   				chance -= 1;
+   				$('.chance-lamp-player').eq(1).addClass('wrong');
+   				console.log("5th IF ST2 CH2 ...  chances left :" + chance);
+   				stage = 2;
+                stage2();
+                return false
+   			}
+   			else if (stage == 2 && chance == 1) { //3rd wrong answer in STAGE2 - GAMEOVER
+                chance -= 1;
+                $('.chance-lamp-player').eq(2).addClass('wrong');
                 console.log("4th IF  ...  chances left :" + chance);
    				alert("game over");
    				var delay = 5000;
@@ -412,24 +378,57 @@ $answerButt.on('click', function(ev) {
    			}
    			else if (stage == 3 && chance == 3){
    			    console.log("wrong pierwsza w finale");
+   			    $('.chance-lamp-player').eq(0).addClass('wrong');
    			    chance -= 1;
    			    console.log(chance);
+   			    alert("1st WRONG         will call stage 3 line 441");
    			    stage3();
+   			    return false
    			}
    			else if (stage == 3 && chance == 2){
    			    console.log("wrong druga w finale");
+   			    $('.chance-lamp-player').eq(1).addClass('wrong');
    			    chance -= 1;
    			    console.log(chance);
+   			    alert("2nd WRONG           will call stage 3 line 449");
    			    stage3();
+   			    return false
    			}
    			else if (stage == 3 && chance == 1){
    			    console.log("wrong ostatnia w finale - wypad");
+   			    $('.chance-lamp-player').eq(2).addClass('wrong');
    			    chance -= 1;
    			    console.log(chance);
    			    var delay = 5000;
                 setTimeout(function(){ window.location.replace("http://127.0.0.1:8000/end/"); }, delay);
 
    				return false
+   			}
+   			if (stage == 1 && chance == 3) { //1st wrong answer in STAGE 1
+   			    $('.chance-lamp-player').eq(0).addClass('wrong');
+                console.log($('.chance-lamp-player').eq(0).addClass('wrong'));
+                chance -= 1;
+   			    askAndCheckRepeat(randomQuestion());
+   			    return false
+   			}
+
+   			else if (stage == 1 && chance == 2) { //2nd wrong answer in STAGE 1 - GAMEOVER
+                console.log("2nd IF  ...  chances left :" + chance);
+                $('.chance-lamp-player').eq(1).addClass('wrong');
+                $('.chance-lamp-player').eq(2).addClass('wrong');
+   				alert("game over");
+   				var delay = 5000;
+   				setTimeout(function(){ window.location.replace("http://127.0.0.1:8000/end/"); }, delay);
+   				return false
+   			}
+   			else if (stage == 3 && chance == 4){
+   			    console.log("chacked - losing one question");
+
+   			    chance -= 1;
+   			    console.log(chance);
+   			    alert("HACKED         will call stage 3 line 441");
+   			    stage3();
+   			    return false
    			}
 
 
