@@ -313,7 +313,7 @@ function askAndCheckRepeat() {
             $('#play-it').click(function() {
 //                            console.log($('audio'));
 
-                            $('audio')[0].play();
+                            $('audio')[0].play()
 
 
           	 	 			setTimeout(function(){
@@ -322,7 +322,7 @@ function askAndCheckRepeat() {
 //            							alert("Audio Stop Successfully");
         							}, 20000);
 
-            	 });
+            	 });  //click play it
 
     	}
     	else {
@@ -348,18 +348,15 @@ function stage2() {
 };
 
 $answerButt.on('click', function(ev) {
-   		// ev.preventDefault();
+
    		npcSimulation();  //daj to w inne miejsce
-//   		console.log($answerInput.val());
-//   		console.log(questNow['toAsk']['answer']);
+
    		console.log($answerInput.val() == questNow['toAsk']['answer']);
    		console.log("dlugosc listy zadanych pytan :" + asked.length);
 
    		if ($answerInput.val() == questNow['toAsk']['answer']) {
 
    			$answerInput.val('');
-//   			console.log('ok answer');
-//   			console.log(chance);
             if (stage == 3) {
    			    console.log("ETAP 3 init");
 
@@ -367,47 +364,47 @@ $answerButt.on('click', function(ev) {
    			    return false
    			}
 
-   			if (asked.length >= 2) {
+   			else if (asked.length == 2) {
    				console.log("ETAP 2");
    				stage = 2; // niedobrze tu jest, bo z rundy 3 wraca do drugiej
    				stage2();
    			}
 
-   			else {
+   			else if (stage == 1) {
 
    			askAndCheckRepeat(randomQuestion());
    			}
-   		} //if answ ok
+   		}
+// now it handles WRONG ANSWERS
    		else {
    			$answerInput.val('');
    			console.log('wrong');
-//   			console.log("stage issssssssssss :" + stage);
+   			console.log('BEFORE IF in wrong handle .... chances:' + chance);
    			chance -= 1
    			var lamp_shut_id = (chance);
    			$('.chance-lamp-player').eq(lamp_shut_id).addClass('wrong');
-//   			console.log("szanseeeeeeeeeeeeeee :" + chance);
-   			if (chance > 1 && asked.length < 2) { //1 zla odpowiedz w stage 1
-   			console.log(chance);
+  			console.log("1st IF  ...  chances left :" + chance);
+   			if (chance > 1 && asked.length < 2) { //1st wrong answer in STAGE 1
 
    			askAndCheckRepeat(randomQuestion());
    			}
-   			else if (stage == 1 && chance == 1) { //na koniec 1wszej rundy - 2 zle odp
 
-   				console.log("koniec");
+   			else if (stage == 1 && chance == 1) { //2nd wrong answer in STAGE 1 - GAMEOVER
+                console.log("2nd IF  ...  chances left :" + chance);
+   				alert("game over");
    				var delay = 5000;
    				setTimeout(function(){ window.location.replace("http://127.0.0.1:8000/end/"); }, delay);
    				return false
    			}
-   			else if (stage == 1 && asked.length == 2) { //przechodzi do rundy2 z 2 szansami -1z 1 db
-   				console.log("ETAP 2");
-   				console.log(chance);
+   			else if (stage == 1 && asked.length == 2) { //at least one good answer in stage 1 - promotion to STAGE 2
+   				alert("ETAP 2");
+   				console.log("3rd IF  ...  chances left :" + chance);
    				stage = 2;
-//   				console.log("stage teraz bedzie :" + stage);
    				stage2();
    			}
-   			else if (chance == 0) { //na koniec szans
-
-   				console.log("koniec");
+   			else if (chance == 0 && stage == 2) { //3rd wrong answer in STAGE2 - GAMEOVER
+                console.log("4th IF  ...  chances left :" + chance);
+   				alert("game over");
    				var delay = 5000;
                 setTimeout(function(){ window.location.replace("http://127.0.0.1:8000/end/"); }, delay);
 

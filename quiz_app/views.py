@@ -168,7 +168,7 @@ def logout_view(request, next_page='/quiz'):
 # REST server views
 
 class QuestionList(generics.ListAPIView):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    # permission_classes = (IsAuthenticatedOrReadOnly,)
     # permission_required = 'change_question'
     # permission_required = 'delete_question'
     queryset = Question.objects.all()
