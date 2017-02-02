@@ -16,6 +16,7 @@ function stage3() {
     alert("ST 3 alert");
 
     $npc = $('.npc').not('.hidden');
+
     console.log($npc);
     askAndCheckRepeat(randomQuestion());
 }
@@ -38,8 +39,8 @@ function loosers() {
             stage = 3;
             chance = 4;
             alert("looosers  HACKED chances=4    call stage 3 line 46");
-            stage3();
-            return false
+
+            return stage3();
         }
 
     else {}
@@ -306,29 +307,27 @@ $answerButt.on('click', function(ev) {
             if (stage == 3) {
    			    console.log("ETAP 3 good answer initializing: stage3() ");
                 alert("GOOD ANSWER    will call stage 3 line 355");
-   			    stage3();
-   			    return false
+
+   			    return stage3();
    			}
 
    			else if ( stage == 1 && asked.length == 2) {
    				console.log("ETAP 2");
    				console.log("ETAP 1 at least 1 good answer initializing: stage2() ");
    				stage = 2; // niedobrze tu jest, bo z rundy 3 wraca do drugiej
-   				stage2();
-   				return false
+
+   				return stage2();
    			}
 
             else if (stage == 2) {
                 console.log("ETAP 2 good answer initializing: stage2() ");
-                stage2();
-                return false
+
+                return stage2();
 
    			}
 
    			else if (stage == 1) {
-
-   			    askAndCheckRepeat(randomQuestion());
-   			    return false
+   			    return askAndCheckRepeat(randomQuestion());
    			}
    		}
 // now it handles WRONG ANSWERS
@@ -345,26 +344,24 @@ $answerButt.on('click', function(ev) {
    				$('.chance-lamp-player').eq(0).addClass('wrong');
    				console.log("3rd IF  ...  chances left :" + chance);
    				stage = 2;
-   				stage2();
 
-   				return false
+   				return stage2();
    			}
    			else if (stage == 2 && chance == 3) { //1st wrong answer STAGE 2
    				chance -= 1;
    				$('.chance-lamp-player').eq(0).addClass('wrong');
    				console.log("4th IF ST2 CH3 ...  chances left :" + chance);
    				stage = 2;
-   				stage2();
 
-   				return false
+   				return stage2();
    			}
    			else if (stage == 2 && chance == 2) { // STAGE 2
    				chance -= 1;
    				$('.chance-lamp-player').eq(1).addClass('wrong');
    				console.log("5th IF ST2 CH2 ...  chances left :" + chance);
    				stage = 2;
-                stage2();
-                return false
+
+                return stage2();
    			}
    			else if (stage == 2 && chance == 1) { //3rd wrong answer in STAGE2 - GAMEOVER
                 chance -= 1;
@@ -382,8 +379,8 @@ $answerButt.on('click', function(ev) {
    			    chance -= 1;
    			    console.log(chance);
    			    alert("1st WRONG         will call stage 3 line 441");
-   			    stage3();
-   			    return false
+
+   			    return stage3()
    			}
    			else if (stage == 3 && chance == 2){
    			    console.log("wrong druga w finale");
@@ -391,8 +388,8 @@ $answerButt.on('click', function(ev) {
    			    chance -= 1;
    			    console.log(chance);
    			    alert("2nd WRONG           will call stage 3 line 449");
-   			    stage3();
-   			    return false
+
+   			    return stage3();
    			}
    			else if (stage == 3 && chance == 1){
    			    console.log("wrong ostatnia w finale - wypad");
@@ -408,8 +405,8 @@ $answerButt.on('click', function(ev) {
    			    $('.chance-lamp-player').eq(0).addClass('wrong');
                 console.log($('.chance-lamp-player').eq(0).addClass('wrong'));
                 chance -= 1;
-   			    askAndCheckRepeat(randomQuestion());
-   			    return false
+
+   			    return askAndCheckRepeat(randomQuestion());
    			}
 
    			else if (stage == 1 && chance == 2) { //2nd wrong answer in STAGE 1 - GAMEOVER
@@ -422,13 +419,14 @@ $answerButt.on('click', function(ev) {
    				return false
    			}
    			else if (stage == 3 && chance == 4){
-   			    console.log("chacked - losing one question");
-
+   			    console.log("hacked - losing one question");
    			    chance -= 1;
-   			    console.log(chance);
-   			    alert("HACKED         will call stage 3 line 441");
-   			    stage3();
-   			    return false
+   			    var $final_npcs = $('.npc').not('.hidden');
+                for (var t = 0; t < $final_npcs.length; t ++) {
+                    $final_npcs.eq(t).children().last().children().removeClass('wrong');
+                }
+
+   			    return stage3();
    			}
 
 
