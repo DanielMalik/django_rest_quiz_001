@@ -422,8 +422,8 @@ $answerButt.on('click', function(ev) {
    			    console.log("hacked - losing one question");
    			    chance -= 1;
    			    var $final_npcs = $('.npc').not('.hidden');
-                for (var t = 0; t < $final_npcs.length; t ++) {
-                    $final_npcs.eq(t).children().last().children().removeClass('wrong');
+   			    for (var t = 0; t < $final_npcs.length; t ++) {
+   			        $final_npcs.eq(t).children().last().children().removeClass('wrong');
                 }
 
    			    return stage3();
