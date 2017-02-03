@@ -13,12 +13,11 @@ main();
 
 function stage3() {
     console.log("ETAP 3");
-    alert("ST 3 alert");
 
     $npc = $('.npc').not('.hidden');
 
     console.log($npc);
-    askAndCheckRepeat(randomQuestion());
+    return askAndCheckRepeat(randomQuestion());
 }
 
 function loosers() {
@@ -33,6 +32,7 @@ function loosers() {
             }
 
         if (stage == 2) {
+
             $('.chance-lamp-player').eq(0).removeClass('wrong');
             $('.chance-lamp-player').eq(1).removeClass('wrong');
             $('.chance-lamp-player').eq(2).removeClass('wrong');
@@ -64,6 +64,13 @@ function npcSimulation() {
              if (ran_answer < 0.79) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer;
+                if (stage == 3) {
+
+                    var pts = parseInt($this_npc.children().last().text())
+                    pts += 10;
+
+                    $this_npc.children().last().children().text(pts);
+                    }
                 }
                 else { npc_answer = false
                         $npcs_all_answers[n] = npc_answer;
@@ -97,6 +104,15 @@ function npcSimulation() {
              if (ran_answer < 0.26) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
+
+                if (stage == 3) {
+
+                    var pts = parseInt($this_npc.children().last().text())
+                    pts += 10;
+
+                    $this_npc.children().last().children().text(pts);
+                    }
+
                 }
                 else { npc_answer = false
                         $npcs_all_answers[n] = npc_answer;
@@ -129,6 +145,15 @@ function npcSimulation() {
              if (ran_answer < 0.15) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
+
+                if (stage == 3) {
+
+                    var pts = parseInt($this_npc.children().last().text())
+                    pts += 10;
+
+                    $this_npc.children().last().children().text(pts);
+                    }
+
                 }
                 else { npc_answer = false
                         $npcs_all_answers[n] = npc_answer;
@@ -160,6 +185,14 @@ function npcSimulation() {
              if (ran_answer < 0.1) {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer
+
+                if (stage == 3) {
+
+                    var pts = parseInt($this_npc.children().last().text())
+                    pts += 10;
+
+                    $this_npc.children().last().children().text(pts);
+                    }
 
                 }
                 else { npc_answer = false
@@ -290,7 +323,7 @@ function askAndCheckRepeat() {
 
 function stage2() {
     console.log("leci funkcja stage2");
-	askAndCheckRepeat(randomQuestion());
+	return askAndCheckRepeat(randomQuestion());
 
 };
 
@@ -307,6 +340,14 @@ $answerButt.on('click', function(ev) {
             if (stage == 3) {
    			    console.log("ETAP 3 good answer initializing: stage3() ");
                 alert("GOOD ANSWER    will call stage 3 line 355");
+
+                if (stage == 3) {
+
+                    var pts = parseInt($('#player-points').children().text());
+                    pts += 10;
+
+                    $('#player-points').children().text(pts);
+                    }
 
    			    return stage3();
    			}
@@ -421,10 +462,30 @@ $answerButt.on('click', function(ev) {
    			else if (stage == 3 && chance == 4){
    			    console.log("hacked - losing one question");
    			    chance -= 1;
+
    			    var $final_npcs = $('.npc').not('.hidden');
+   			    var firstNPCpointsToFinal =$final_npcs.eq(0).children().last().children().not('.wrong').length
+   			    console.log(firstNPCpointsToFinal);
+   			    var secondNPCpointsToFinal =$final_npcs.eq(1).children().last().children().not('.wrong').length
+   			    console.log(secondNPCpointsToFinal);
    			    for (var t = 0; t < $final_npcs.length; t ++) {
    			        $final_npcs.eq(t).children().last().children().removeClass('wrong');
                 }
+
+//                var firstNPCpointsToFinal =
+                var pointsToFinal = $('.chance-lamp-player').not('.wrong').length
+                console.log(pointsToFinal);
+                $points1 = $('<div class="points" id="first-finalist"></div>');
+                $points1.html("<h4>" + firstNPCpointsToFinal + "</h4>" );
+                $npc = $('.npc').not('.hidden');
+
+                $npc.eq(0).append($points1);
+                $points2 = $('<div class="points" id="second-finalist"></div>')
+                $points2.html("<h4>" + secondNPCpointsToFinal + "</h4>" );
+                $npc.eq(1).append($points2);
+                $pointsPlayer = $('<div class="points" id="player-points"></div>')
+                $pointsPlayer.html("<h4>" + pointsToFinal + "</h4>" );
+                $('#player').append($pointsPlayer);
 
    			    return stage3();
    			}
