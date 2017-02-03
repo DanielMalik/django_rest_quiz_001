@@ -31,21 +31,82 @@ function stage3() {
 function stage3beta() {
     alert("TERAZ BEDZIE WYBIERANIE DO ODPOWIEDZI");
 
-    $('#AskNPC-1').on('click', function(evt) {
+    $('#AskNPC-1').on('click', function() {
 
-        console.log(evt);
 
         return singleNPCsimulation(0)
 
     });
 
-    $('#AskNPC-2').on('click', function(event) {
-
-        console.log(event);
+    $('#AskNPC-2').on('click', function() {
 
         return singleNPCsimulation(1)
 
     });
+
+    $('#AskPlayer').on('click', function() {
+
+        console.log("!!!   KLIK   !!!")
+        return askAndCheckRepeat(randomQuestion());
+
+    });
+
+    $('#answerbuttonstage3b').on('click', function(ev) {
+
+
+
+   		console.log($answerInput.val() == questNow['toAsk']['answer']);
+   		console.log("dlugosc listy zadanych pytan :" + asked.length);
+
+   		if ($answerInput.val() == questNow['toAsk']['answer']) {
+
+   			$answerInput.val('');
+            var pts = parseInt($('#player-points').children().text());
+            pts += 20;
+
+            $('#player-points').children().text(pts);
+            return stage3beta();
+
+        }
+   		else {
+   			$answerInput.val('');
+   			console.log('wrong');
+   			console.log('BEFORE IF in wrong handle .... chances:' + chance);
+
+   			if (stage == 3 && chance == 3){
+   			    console.log("wrong pierwsza w finale");
+   			    $('.chance-lamp-player').eq(0).addClass('wrong');
+   			    chance -= 1;
+   			    console.log(chance);
+   			    alert("1st WRONG         will call stage 3 line 441");
+
+   			    return stage3beta()
+   			}
+   			else if (stage == 3 && chance == 2){
+   			    console.log("wrong druga w finale");
+   			    $('.chance-lamp-player').eq(1).addClass('wrong');
+   			    chance -= 1;
+   			    console.log(chance);
+   			    alert("2nd WRONG           will call stage 3 line 449");
+
+   			    return stage3beta();
+   			}
+   			else if (stage == 3 && chance == 1){
+   			    console.log("wrong ostatnia w finale - wypad");
+   			    $('.chance-lamp-player').eq(2).addClass('wrong');
+   			    chance -= 1;
+   			    console.log(chance);
+
+   			    var delay = 5000;
+                setTimeout(function(){ window.location.replace("http://127.0.0.1:8000/end/"); }, delay);
+
+   				return false
+   			}
+
+
+   		} //else - answer wrong
+
+   });
 
 };
 
@@ -62,11 +123,17 @@ function loosers() {
 
         if (stage == 2) {
 
+            var pointsToFinal = $('.chance-lamp-player').not('.wrong').length
+            $pointsPlayer = $('<div class="points" id="player-points"></div>')
+            $pointsPlayer.html("<h4>" + pointsToFinal + "</h4>" );
+            $('#player').append($pointsPlayer);
+
             $('.chance-lamp-player').eq(0).removeClass('wrong');
             $('.chance-lamp-player').eq(1).removeClass('wrong');
             $('.chance-lamp-player').eq(2).removeClass('wrong');
             stage = 3;
             chance = 4;
+
             alert("looosers  HACKED chances=4    call stage 3 line 46");
 
             return stage3();
@@ -539,6 +606,8 @@ $answerButt.on('click', function(ev) {
                         $('#answer').append($answerNPC1);
                         $('#answer').append($answerNow);
 
+
+
                         return stage3beta();
 
                     }
@@ -664,21 +733,16 @@ $answerButt.on('click', function(ev) {
    			    for (var t = 0; t < $final_npcs.length; t ++) {
    			        $final_npcs.eq(t).children().last().children().removeClass('wrong');
                 }
-
-//                var firstNPCpointsToFinal =
-                var pointsToFinal = $('.chance-lamp-player').not('.wrong').length
-                console.log(pointsToFinal);
-                $points1 = $('<div class="points" id="first-finalist"></div>');
-                $points1.html("<h4>" + firstNPCpointsToFinal + "</h4>" );
                 $npc = $('.npc').not('.hidden');
 
+                $points1 = $('<div class="points" id="first-finalist"></div>');
+                $points1.html("<h4>" + firstNPCpointsToFinal + "</h4>" );
                 $npc.eq(0).append($points1);
+
                 $points2 = $('<div class="points" id="second-finalist"></div>')
                 $points2.html("<h4>" + secondNPCpointsToFinal + "</h4>" );
                 $npc.eq(1).append($points2);
-                $pointsPlayer = $('<div class="points" id="player-points"></div>')
-                $pointsPlayer.html("<h4>" + pointsToFinal + "</h4>" );
-                $('#player').append($pointsPlayer);
+
 
    			    return stage3();
    			}
