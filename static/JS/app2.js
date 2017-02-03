@@ -11,6 +11,14 @@ $answerInput = $('#answer-input');
 $answerButt = $('#answer-butt');
 main();
 
+function stage1() { askAndCheckRepeat(randomQuestion()); };
+
+function stage2() {
+    console.log("leci funkcja stage2");
+	return askAndCheckRepeat(randomQuestion());
+
+};
+
 function stage3() {
     console.log("ETAP 3");
 
@@ -18,7 +26,28 @@ function stage3() {
 
     console.log($npc);
     return askAndCheckRepeat(randomQuestion());
-}
+};
+
+function stage3beta() {
+    alert("TERAZ BEDZIE WYBIERANIE DO ODPOWIEDZI");
+
+    $('#AskNPC-1').on('click', function(evt) {
+
+        console.log(evt);
+
+        return singleNPCsimulation(0)
+
+    });
+
+    $('#AskNPC-2').on('click', function(event) {
+
+        console.log(event);
+
+        return singleNPCsimulation(1)
+
+    });
+
+};
 
 function loosers() {
     console.log("loosers function initialized");
@@ -45,8 +74,162 @@ function loosers() {
 
     else {}
     }
-}; //funkcja loosers
+};
 
+function singleNPCsimulation(id) {
+
+    var n = id
+    console.log(n);
+
+    var $npc = $('.npc').not('.out');
+//    var $npcs_all_answers = {};
+
+    $this_npc = $npc.eq(n);
+    console.log('singleNPCsimulation');
+    $class = $this_npc.data("level");
+
+    if ($class == 4) {
+             var ran_answer = Math.random();
+             var $chances_lamps = $this_npc.find('.chances');
+             console.log($chances_lamps);
+
+             if (ran_answer < 0.79) {
+                var npc_answer = true
+                console.log(npc_answer)
+
+                var pts = parseInt($this_npc.children().last().text())
+                pts += 10;
+
+                $this_npc.children().last().children().text(pts);
+
+                }
+            else {
+                npc_answer = false
+                console.log(npc_answer);
+                $lamps = $chances_lamps.children();
+
+                if ($lamps.eq(0).hasClass("wrong") == false) {
+
+                    $lamps.eq(0).addClass("wrong");
+                    }
+                else if ($lamps.eq(1).hasClass("wrong") == false && $lamps.eq(2).hasClass("wrong") == false) {
+
+                    $lamps.eq(1).addClass("wrong");
+                    }
+                else if ($lamps.eq(2).hasClass("wrong") == false) {
+
+                    $lamps.eq(2).addClass("wrong");
+                    $this_npc.addClass("wrong out");
+                    }
+                }
+        } //end if class=4
+    else if ($class == 3) {
+             var ran_answer = Math.random();
+             var $chances_lamps = $this_npc.find('.chances');
+             console.log($chances_lamps);
+
+             if (ran_answer < 0.79) {
+                var npc_answer = true
+                console.log(npc_answer)
+
+                var pts = parseInt($this_npc.children().last().text())
+                pts += 10;
+
+                $this_npc.children().last().children().text(pts);
+
+                }
+            else {
+                npc_answer = false
+                console.log(npc_answer);
+                $lamps = $chances_lamps.children();
+
+                if ($lamps.eq(0).hasClass("wrong") == false) {
+
+                    $lamps.eq(0).addClass("wrong");
+                    }
+                else if ($lamps.eq(1).hasClass("wrong") == false && $lamps.eq(2).hasClass("wrong") == false) {
+
+                    $lamps.eq(1).addClass("wrong");
+                    }
+                else if ($lamps.eq(2).hasClass("wrong") == false) {
+
+                    $lamps.eq(2).addClass("wrong");
+                    $this_npc.addClass("wrong out");
+                    }
+                }
+        } //end if class=3
+    else if ($class == 2) {
+             var ran_answer = Math.random();
+             var $chances_lamps = $this_npc.find('.chances');
+             console.log($chances_lamps);
+
+             if (ran_answer < 0.79) {
+                var npc_answer = true
+                console.log(npc_answer)
+
+                var pts = parseInt($this_npc.children().last().text())
+                pts += 10;
+
+                $this_npc.children().last().children().text(pts);
+
+                }
+            else {
+                npc_answer = false
+                console.log(npc_answer);
+                $lamps = $chances_lamps.children();
+
+                if ($lamps.eq(0).hasClass("wrong") == false) {
+
+                    $lamps.eq(0).addClass("wrong");
+                    }
+                else if ($lamps.eq(1).hasClass("wrong") == false && $lamps.eq(2).hasClass("wrong") == false) {
+
+                    $lamps.eq(1).addClass("wrong");
+                    }
+                else if ($lamps.eq(2).hasClass("wrong") == false) {
+
+                    $lamps.eq(2).addClass("wrong");
+                    $this_npc.addClass("wrong out");
+                    }
+                }
+        } //end if class=2
+    else if ($class == 1) {
+             var ran_answer = Math.random();
+             var $chances_lamps = $this_npc.find('.chances');
+             console.log($chances_lamps);
+
+             if (ran_answer < 0.79) {
+                var npc_answer = true
+                console.log(npc_answer)
+
+                var pts = parseInt($this_npc.children().last().text())
+                pts += 10;
+
+                $this_npc.children().last().children().text(pts);
+
+                }
+            else {
+                npc_answer = false
+                console.log(npc_answer);
+                $lamps = $chances_lamps.children();
+
+                if ($lamps.eq(0).hasClass("wrong") == false) {
+
+                    $lamps.eq(0).addClass("wrong");
+                    }
+                else if ($lamps.eq(1).hasClass("wrong") == false && $lamps.eq(2).hasClass("wrong") == false) {
+
+                    $lamps.eq(1).addClass("wrong");
+                    }
+                else if ($lamps.eq(2).hasClass("wrong") == false) {
+
+                    $lamps.eq(2).addClass("wrong");
+                    $this_npc.addClass("wrong out");
+                    }
+                }
+        } //end if class=1
+
+}
 
 function npcSimulation() {
 
@@ -321,11 +504,6 @@ function askAndCheckRepeat() {
 
 };
 
-function stage2() {
-    console.log("leci funkcja stage2");
-	return askAndCheckRepeat(randomQuestion());
-
-};
 
 $answerButt.on('click', function(ev) {
 
@@ -348,7 +526,22 @@ $answerButt.on('click', function(ev) {
 
                     $('#player-points').children().text(pts);
                     }
+                    if (stage == 3 && parseInt($('#player-points').children().text()) > 30 && $('#AskPlayer').length == 0) {
+                        $answerNow = $('<button class="btn btn-danger" id="AskPlayer">DLA MNIE</button>');
+                        $answerNPC1 = $('<button class="btn btn-primary" id="AskNPC-1">GRACZ 1</button>');
+                        $answerNPC2 = $('<button class="btn btn-primary" id="AskNPC-2">Gracz 2</button>');
 
+                        $answerButt.detach();
+                        $answerButton = $('<button class="btn btn-secondary" id="answerbuttonstage3b">ANSWER</button>');
+                        $('#answer').append($answerButton);
+
+                        $('#answer').append($answerNPC2);
+                        $('#answer').append($answerNPC1);
+                        $('#answer').append($answerNow);
+
+                        return stage3beta();
+
+                    }
    			    return stage3();
    			}
 
@@ -494,6 +687,8 @@ $answerButt.on('click', function(ev) {
    		} //else - answer wrong
 
    }); //ev.list do submit
+
+
 function main() {
 
 
@@ -514,8 +709,8 @@ function main() {
 
 			}
 
+            stage1();
 
-			askAndCheckRepeat(randomQuestion());
 
 
 
