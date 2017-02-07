@@ -110,6 +110,28 @@ function stage3beta() {
 
 };
 
+function npcChooseToAnswer(n, $this_npc) {
+//    var $npc = $('.npc').not('.out');
+//    var character_1 = $npc.eq(0).data('character');
+//    var character_2 = $npc.eq(1).data('character');
+//
+        alert('works now!');
+        var character = $this_npc.data('character');
+        var rand = character + Math.floor((Math.random() * 10));
+        console.log(rand);
+        if (rand <= 5) {
+            if (n == 0) { alert('to 1'); return singleNPCsimulation(1) }
+
+            else { alert('to 2'); return singleNPCsimulation(0) }
+            }//on other npc
+        else if (rand > 5 && rand < 10) {  alert('to 3'); return askAndCheckRepeat(randomQuestion()) } // on player
+        else if (rand >= 10) {
+            var npcChoose = true;
+            alert('to 4');
+            return singleNPCsimulation(n, npcChoose)
+            } // on self
+}
+
 function loosers() {
     console.log("loosers function initialized");
     var $npc = $('.out');
@@ -143,32 +165,42 @@ function loosers() {
     }
 };
 
-function singleNPCsimulation(id) {
+function singleNPCsimulation(id, npcChoose) {
+
+    nocChoose = npcChoose || false;
 
     var n = id
-    console.log(n);
-
     var $npc = $('.npc').not('.out');
-//    var $npcs_all_answers = {};
-
-    $this_npc = $npc.eq(n);
+    var $this_npc = $npc.eq(n);
     console.log('singleNPCsimulation');
-    $class = $this_npc.data("level");
+    var $class = $this_npc.data("level");
+    var $character = $this_npc.data("character");
 
     if ($class == 4) {
              var ran_answer = Math.random();
              var $chances_lamps = $this_npc.find('.chances');
-             console.log($chances_lamps);
 
              if (ran_answer < 0.79) {
                 var npc_answer = true
                 console.log(npc_answer)
+                if (npcChoose == true) {
+                    var pts = parseInt($this_npc.children().last().text())
+                    pts += 20;
 
-                var pts = parseInt($this_npc.children().last().text())
-                pts += 10;
+                    $this_npc.children().last().children().text(pts);
 
-                $this_npc.children().last().children().text(pts);
+                    return npcChooseToAnswer(n, $this_npc);
 
+                }
+                else {
+                    var pts = parseInt($this_npc.children().last().text())
+                    pts += 10;
+
+                    $this_npc.children().last().children().text(pts);
+
+                    return npcChooseToAnswer(n, $this_npc);
+
+                    }
                 }
             else {
                 npc_answer = false
@@ -193,17 +225,28 @@ function singleNPCsimulation(id) {
     else if ($class == 3) {
              var ran_answer = Math.random();
              var $chances_lamps = $this_npc.find('.chances');
-             console.log($chances_lamps);
 
              if (ran_answer < 0.79) {
                 var npc_answer = true
                 console.log(npc_answer)
+                if (npcChoose == true) {
+                    var pts = parseInt($this_npc.children().last().text())
+                    pts += 20;
 
-                var pts = parseInt($this_npc.children().last().text())
-                pts += 10;
+                    $this_npc.children().last().children().text(pts);
 
-                $this_npc.children().last().children().text(pts);
+                    return npcChooseToAnswer(n, $this_npc);
 
+                }
+                else {
+                    var pts = parseInt($this_npc.children().last().text())
+                    pts += 10;
+
+                    $this_npc.children().last().children().text(pts);
+
+                    return npcChooseToAnswer(n, $this_npc);
+
+                    }
                 }
             else {
                 npc_answer = false
@@ -228,17 +271,27 @@ function singleNPCsimulation(id) {
     else if ($class == 2) {
              var ran_answer = Math.random();
              var $chances_lamps = $this_npc.find('.chances');
-             console.log($chances_lamps);
 
              if (ran_answer < 0.79) {
                 var npc_answer = true
-                console.log(npc_answer)
+                if (npcChoose == true) {
+                    var pts = parseInt($this_npc.children().last().text())
+                    pts += 20;
 
-                var pts = parseInt($this_npc.children().last().text())
-                pts += 10;
+                    $this_npc.children().last().children().text(pts);
 
-                $this_npc.children().last().children().text(pts);
+                    return npcChooseToAnswer(n, $this_npc);
 
+                }
+                else {
+                    var pts = parseInt($this_npc.children().last().text())
+                    pts += 10;
+
+                    $this_npc.children().last().children().text(pts);
+
+                    return npcChooseToAnswer(n, $this_npc);
+
+                    }
                 }
             else {
                 npc_answer = false
@@ -263,17 +316,28 @@ function singleNPCsimulation(id) {
     else if ($class == 1) {
              var ran_answer = Math.random();
              var $chances_lamps = $this_npc.find('.chances');
-             console.log($chances_lamps);
 
              if (ran_answer < 0.79) {
                 var npc_answer = true
                 console.log(npc_answer)
+                if (npcChoose == true) {
+                    var pts = parseInt($this_npc.children().last().text())
+                    pts += 20;
 
-                var pts = parseInt($this_npc.children().last().text())
-                pts += 10;
+                    $this_npc.children().last().children().text(pts);
 
-                $this_npc.children().last().children().text(pts);
+                    return npcChooseToAnswer(n, $this_npc);
 
+                }
+                else {
+                    var pts = parseInt($this_npc.children().last().text())
+                    pts += 10;
+
+                    $this_npc.children().last().children().text(pts);
+
+                    return npcChooseToAnswer(n, $this_npc);
+
+                    }
                 }
             else {
                 npc_answer = false
@@ -303,9 +367,9 @@ function npcSimulation() {
     var $npc = $('.npc');
     var $npcs_all_answers = {};
     for (var n = 0; n < $npc.length; n ++) {
-        $this_npc = $npc.eq(n);
+        var $this_npc = $npc.eq(n);
 
-        $class = $this_npc.data("level");
+        var $class = $this_npc.data("level");
 
         if ($class == 4) {
              var ran_answer = Math.random();
@@ -479,26 +543,18 @@ function npcSimulation() {
 
 function randomQuestion(){
 
-
-
-//		        console.log(data);
 		        var dataLen = Object.keys(data).length;
 		        var ran_key = Math.floor(Math.random() * dataLen);
-//		        console.log("ran key " + ran_key);
-//		        var toAsk = data[ran_key];
-
-		        					//if zeby sie pytania nie powtarzaly
 
 		        if ($.inArray(ran_key, asked) != -1) {
 		        	console.log('again');
-		        	                // if na koniec pytan
 		        	if (dataLen == asked.length) {
 		        		alert("SZNUK: nie mam wiecej pytan");
 		        		return false
 		        	}
 		        	else {
 		        	return randomQuestion();
-		        }
+		            }
 		        }
 		        else {
 		        console.log("RANDOM QUESTION SELECT");
@@ -517,7 +573,7 @@ function askAndCheckRepeat() {
 	console.log("function aACR()    szanse: " + chance);
 	$query = $('#query');
 	$media = $('#media');
-	$timebelt = $('#timebelt');
+
 	$answerInput = $('#answer-input');
 	$answerButt = $('#answer-butt');
 			//show question to player
@@ -553,7 +609,7 @@ function askAndCheckRepeat() {
           	 	 			setTimeout(function(){
 
             						$('audio')[0].pause();
-        							}, 20000);
+        							}, 30000);
 
             	 });  //click play it
 
@@ -734,6 +790,7 @@ $answerButt.on('click', function(ev) {
    			        $final_npcs.eq(t).children().last().children().removeClass('wrong');
                 }
                 $npc = $('.npc').not('.hidden');
+                alert("idzie to?!");
 
                 $points1 = $('<div class="points" id="first-finalist"></div>');
                 $points1.html("<h4>" + firstNPCpointsToFinal + "</h4>" );

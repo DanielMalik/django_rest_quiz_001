@@ -33,6 +33,13 @@ LEVEL = (
     (4, 'sheldon')
 )
 
+CHARACTERS = (
+    (0, 'random'),
+    (1, 'vicious'),
+    (2,  'next'),
+    (3, 'stategist')
+)
+
 class NPCPlayer(models.Model):
     name = models.CharField(max_length=128,)
     mug_shot = models.ImageField(upload_to='npcs')
@@ -40,6 +47,7 @@ class NPCPlayer(models.Model):
     occupation = models.CharField(max_length=128,)
     interested = models.CharField(max_length=128,)
     level = models.SmallIntegerField(choices=LEVEL)
+    character = models.SmallIntegerField(choices=CHARACTERS, default=0)
     points = models.IntegerField(default=0)
 
     class Meta:
