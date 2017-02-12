@@ -11,94 +11,81 @@ $answerInput = $('#answer-input');
 $answerButt = $('#answer-butt');
 main();
 
-function stage1() { askAndCheckRepeat(randomQuestion()); };
+function stage1() {
+    return askAndCheckRepeat(randomQuestion());
+    };
 
 function stage2() {
-    console.log("leci funkcja stage2");
 	return askAndCheckRepeat(randomQuestion());
-
-};
+    };
 
 function stage3() {
-    console.log("ETAP 3");
-
     $npc = $('.npc').not('.hidden');
-
-    console.log($npc);
     return askAndCheckRepeat(randomQuestion());
 };
 
 function stage3beta() {
-    alert("TERAZ BEDZIE WYBIERANIE DO ODPOWIEDZI");
+
+    console.log('Stage 3 beta INIT !!! answer val =' + $answerInput.val() );
 
     $('#AskNPC-1').on('click', function() {
 
-
         return singleNPCsimulation(0)
-
-    });
+        });
 
     $('#AskNPC-2').on('click', function() {
 
         return singleNPCsimulation(1)
-
-    });
+        });
 
     $('#AskPlayer').on('click', function() {
 
-        console.log("!!!   KLIK   !!!")
         return askAndCheckRepeat(randomQuestion());
-
-    });
+        });
 
     $('#answerbuttonstage3b').on('click', function(ev) {
-
-
-
    		console.log($answerInput.val() == questNow['toAsk']['answer']);
-   		console.log("dlugosc listy zadanych pytan :" + asked.length);
-
    		if ($answerInput.val() == questNow['toAsk']['answer']) {
-
-   			$answerInput.val('');
+//   			$answerInput.val('');
             var pts = parseInt($('#player-points').children().text());
+
             pts += 20;
 
             $('#player-points').children().text(pts);
+            ev.preventDefault();
             return stage3beta();
 
         }
    		else {
-   			$answerInput.val('');
+//   			$answerInput.val('');
    			console.log('wrong');
-   			console.log('BEFORE IF in wrong handle .... chances:' + chance);
 
    			if (stage == 3 && chance == 3){
    			    console.log("wrong pierwsza w finale");
+   			    console.log(stage);
    			    $('.chance-lamp-player').eq(0).addClass('wrong');
    			    chance -= 1;
-   			    console.log(chance);
-   			    alert("1st WRONG         will call stage 3 line 441");
-
+   			    alert("1st WRONG         will call stage 3 line 441 stage: " + stage);
+//                $answerInput.val('');
+                ev.preventDefault();
    			    return stage3beta()
    			}
    			else if (stage == 3 && chance == 2){
    			    console.log("wrong druga w finale");
    			    $('.chance-lamp-player').eq(1).addClass('wrong');
    			    chance -= 1;
-   			    console.log(chance);
-   			    alert("2nd WRONG           will call stage 3 line 449");
-
+   			    alert("2nd WRONG           will call stage 3 line 449 stage: " + stage);
+//                $answerInput.val('');
+                ev.preventDefault();
    			    return stage3beta();
    			}
    			else if (stage == 3 && chance == 1){
-   			    console.log("wrong ostatnia w finale - wypad");
+   			    console.log("wrong ostatnia w finale - koniec");
    			    $('.chance-lamp-player').eq(2).addClass('wrong');
    			    chance -= 1;
-   			    console.log(chance);
 
-   			    var delay = 5000;
-                setTimeout(function(){ window.location.replace("http://127.0.0.1:8000/end/"); }, delay);
+//   			    var delay = 5000;
+//                setTimeout(function(){ window.location.replace("http://127.0.0.1:8000/end/"); }, delay);
 
    				return false
    			}
@@ -111,23 +98,18 @@ function stage3beta() {
 };
 
 function npcChooseToAnswer(n, $this_npc) {
-//    var $npc = $('.npc').not('.out');
-//    var character_1 = $npc.eq(0).data('character');
-//    var character_2 = $npc.eq(1).data('character');
-//
-        alert('works now!');
         var character = $this_npc.data('character');
         var rand = character + Math.floor((Math.random() * 10));
-        console.log(rand);
         if (rand <= 5) {
-            if (n == 0) { alert('to 1'); return singleNPCsimulation(1) }
+            if (n == 0) { return singleNPCsimulation(1) }
 
-            else { alert('to 2'); return singleNPCsimulation(0) }
+            else { return singleNPCsimulation(0) }
             }//on other npc
-        else if (rand > 5 && rand < 10) {  alert('to 3'); return askAndCheckRepeat(randomQuestion()) } // on player
+        else if (rand > 5 && rand < 10) {
+            console.log('npc attacks player!!! stage: ' + stage);
+            return askAndCheckRepeat(randomQuestion()) } // on player
         else if (rand >= 10) {
             var npcChoose = true;
-            alert('to 4');
             return singleNPCsimulation(n, npcChoose)
             } // on self
 }
@@ -139,8 +121,6 @@ function loosers() {
 
         for (var t =0; t < 7; t++) {
             $npc.eq(t).addClass("hidden");
-            console.log("npcs loosig chances");
-
             }
 
         if (stage == 2) {
@@ -161,14 +141,15 @@ function loosers() {
             return stage3();
         }
 
-    else {}
+    else {
+        return null
+    }
     }
 };
 
 function singleNPCsimulation(id, npcChoose) {
 
-    nocChoose = npcChoose || false;
-
+    npcChoose = npcChoose || false;
     var n = id
     var $npc = $('.npc').not('.out');
     var $this_npc = $npc.eq(n);
@@ -186,20 +167,14 @@ function singleNPCsimulation(id, npcChoose) {
                 if (npcChoose == true) {
                     var pts = parseInt($this_npc.children().last().text())
                     pts += 20;
-
                     $this_npc.children().last().children().text(pts);
-
                     return npcChooseToAnswer(n, $this_npc);
-
-                }
+                    }
                 else {
                     var pts = parseInt($this_npc.children().last().text())
                     pts += 10;
-
                     $this_npc.children().last().children().text(pts);
-
                     return npcChooseToAnswer(n, $this_npc);
-
                     }
                 }
             else {
@@ -208,15 +183,12 @@ function singleNPCsimulation(id, npcChoose) {
                 $lamps = $chances_lamps.children();
 
                 if ($lamps.eq(0).hasClass("wrong") == false) {
-
                     $lamps.eq(0).addClass("wrong");
                     }
                 else if ($lamps.eq(1).hasClass("wrong") == false && $lamps.eq(2).hasClass("wrong") == false) {
-
                     $lamps.eq(1).addClass("wrong");
                     }
                 else if ($lamps.eq(2).hasClass("wrong") == false) {
-
                     $lamps.eq(2).addClass("wrong");
                     $this_npc.addClass("wrong out");
                     }
@@ -232,20 +204,14 @@ function singleNPCsimulation(id, npcChoose) {
                 if (npcChoose == true) {
                     var pts = parseInt($this_npc.children().last().text())
                     pts += 20;
-
                     $this_npc.children().last().children().text(pts);
-
                     return npcChooseToAnswer(n, $this_npc);
-
-                }
+                    }
                 else {
                     var pts = parseInt($this_npc.children().last().text())
                     pts += 10;
-
                     $this_npc.children().last().children().text(pts);
-
                     return npcChooseToAnswer(n, $this_npc);
-
                     }
                 }
             else {
@@ -254,15 +220,12 @@ function singleNPCsimulation(id, npcChoose) {
                 $lamps = $chances_lamps.children();
 
                 if ($lamps.eq(0).hasClass("wrong") == false) {
-
                     $lamps.eq(0).addClass("wrong");
                     }
                 else if ($lamps.eq(1).hasClass("wrong") == false && $lamps.eq(2).hasClass("wrong") == false) {
-
                     $lamps.eq(1).addClass("wrong");
                     }
                 else if ($lamps.eq(2).hasClass("wrong") == false) {
-
                     $lamps.eq(2).addClass("wrong");
                     $this_npc.addClass("wrong out");
                     }
@@ -277,20 +240,14 @@ function singleNPCsimulation(id, npcChoose) {
                 if (npcChoose == true) {
                     var pts = parseInt($this_npc.children().last().text())
                     pts += 20;
-
                     $this_npc.children().last().children().text(pts);
-
                     return npcChooseToAnswer(n, $this_npc);
-
-                }
+                    }
                 else {
                     var pts = parseInt($this_npc.children().last().text())
                     pts += 10;
-
                     $this_npc.children().last().children().text(pts);
-
                     return npcChooseToAnswer(n, $this_npc);
-
                     }
                 }
             else {
@@ -299,15 +256,12 @@ function singleNPCsimulation(id, npcChoose) {
                 $lamps = $chances_lamps.children();
 
                 if ($lamps.eq(0).hasClass("wrong") == false) {
-
                     $lamps.eq(0).addClass("wrong");
                     }
                 else if ($lamps.eq(1).hasClass("wrong") == false && $lamps.eq(2).hasClass("wrong") == false) {
-
                     $lamps.eq(1).addClass("wrong");
                     }
                 else if ($lamps.eq(2).hasClass("wrong") == false) {
-
                     $lamps.eq(2).addClass("wrong");
                     $this_npc.addClass("wrong out");
                     }
@@ -323,20 +277,14 @@ function singleNPCsimulation(id, npcChoose) {
                 if (npcChoose == true) {
                     var pts = parseInt($this_npc.children().last().text())
                     pts += 20;
-
                     $this_npc.children().last().children().text(pts);
-
                     return npcChooseToAnswer(n, $this_npc);
-
-                }
+                    }
                 else {
                     var pts = parseInt($this_npc.children().last().text())
                     pts += 10;
-
                     $this_npc.children().last().children().text(pts);
-
                     return npcChooseToAnswer(n, $this_npc);
-
                     }
                 }
             else {
@@ -345,26 +293,23 @@ function singleNPCsimulation(id, npcChoose) {
                 $lamps = $chances_lamps.children();
 
                 if ($lamps.eq(0).hasClass("wrong") == false) {
-
                     $lamps.eq(0).addClass("wrong");
                     }
                 else if ($lamps.eq(1).hasClass("wrong") == false && $lamps.eq(2).hasClass("wrong") == false) {
-
                     $lamps.eq(1).addClass("wrong");
                     }
                 else if ($lamps.eq(2).hasClass("wrong") == false) {
-
                     $lamps.eq(2).addClass("wrong");
                     $this_npc.addClass("wrong out");
                     }
                 }
         } //end if class=1
 
-}
+}; //end singleNPCsimulation
 
 function npcSimulation() {
 
-    var $npc = $('.npc');
+    var $npc = $('.npc').not('.out');
     var $npcs_all_answers = {};
     for (var n = 0; n < $npc.length; n ++) {
         var $this_npc = $npc.eq(n);
@@ -379,14 +324,15 @@ function npcSimulation() {
                 var npc_answer = true
                 $npcs_all_answers[n] = npc_answer;
                 if (stage == 3) {
-
                     var pts = parseInt($this_npc.children().last().text())
                     pts += 10;
-
                     $this_npc.children().last().children().text(pts);
                     }
                 }
                 else { npc_answer = false
+                    var $npcout = $('.out');
+                    if ($npcout.length == 7) { return loosers() }
+                    else {
                         $npcs_all_answers[n] = npc_answer;
                         $lamps = $chances_lamps.children();
 
@@ -397,7 +343,7 @@ function npcSimulation() {
                             $this_npc.addClass("wrong out");
                             $lamps.eq(1).addClass("wrong");
                             $lamps.eq(2).addClass("wrong");
-                            loosers();
+
                             }
                         else if ($lamps.eq(2).hasClass("wrong") == false && $lamps.eq(1).hasClass("wrong") == false && $lamps.eq(0).hasClass("wrong") == true && stage > 1) {
                             $lamps.eq(1).addClass("wrong");
@@ -405,11 +351,11 @@ function npcSimulation() {
                         else if($lamps.eq(0).hasClass("wrong") == true && $lamps.eq(1).hasClass("wrong") == true ) {
                             $lamps.eq(2).addClass("wrong");
                             $this_npc.addClass("wrong out");
-                            loosers();
+
                             }
-
-
                         }
+
+                    }
         } //end if class=4
         else if ($class == 3) {
              var ran_answer = Math.random();
@@ -429,6 +375,9 @@ function npcSimulation() {
 
                 }
                 else { npc_answer = false
+                    var $npcout = $('.out');
+                    if ($npcout.length == 7) { return loosers() }
+                    else {
                         $npcs_all_answers[n] = npc_answer;
                         $lamps = $chances_lamps.children();
 
@@ -439,7 +388,7 @@ function npcSimulation() {
                             $this_npc.addClass("wrong out");
                             $lamps.eq(1).addClass("wrong");
                             $lamps.eq(2).addClass("wrong");
-                            loosers();
+
                             }
                         else if ($lamps.eq(2).hasClass("wrong") == false && $lamps.eq(1).hasClass("wrong") == false && $lamps.eq(0).hasClass("wrong") == true && stage > 1) {
                             $lamps.eq(1).addClass("wrong");
@@ -447,10 +396,11 @@ function npcSimulation() {
                         else if($lamps.eq(0).hasClass("wrong") == true && $lamps.eq(1).hasClass("wrong") == true ) {
                             $lamps.eq(2).addClass("wrong");
                             $this_npc.addClass("wrong out");
-                            loosers();
+
                             }
 
                         }
+                    }
         } //end if class=3
         else if ($class == 2) {
              var ran_answer = Math.random();
@@ -470,6 +420,9 @@ function npcSimulation() {
 
                 }
                 else { npc_answer = false
+                    var $npcout = $('.out');
+                    if ($npcout.length == 7) { return loosers() }
+                    else {
                         $npcs_all_answers[n] = npc_answer;
                         $lamps = $chances_lamps.children();
 
@@ -480,7 +433,7 @@ function npcSimulation() {
                             $this_npc.addClass("wrong out");
                             $lamps.eq(1).addClass("wrong");
                             $lamps.eq(2).addClass("wrong");
-                            loosers();
+
                             }
                         else if ($lamps.eq(2).hasClass("wrong") == false && $lamps.eq(1).hasClass("wrong") == false && $lamps.eq(0).hasClass("wrong") == true && stage > 1) {
                             $lamps.eq(1).addClass("wrong");
@@ -488,10 +441,11 @@ function npcSimulation() {
                         else if($lamps.eq(0).hasClass("wrong") == true && $lamps.eq(1).hasClass("wrong") == true ) {
                             $lamps.eq(2).addClass("wrong");
                             $this_npc.addClass("wrong out");
-                            loosers();
+
                             }
 
                         }
+                    }
         } //end if class=2
         else if ($class == 1) {
              var ran_answer = Math.random();
@@ -510,6 +464,9 @@ function npcSimulation() {
 
                 }
                 else { npc_answer = false
+                    var $npcout = $('.out');
+                    if ($npcout.length == 7) { return loosers() }
+                    else {
                         $npcs_all_answers[n] = npc_answer;
                         $lamps = $chances_lamps.children();
 
@@ -520,7 +477,7 @@ function npcSimulation() {
                             $this_npc.addClass("wrong out");
                             $lamps.eq(1).addClass("wrong");
                             $lamps.eq(2).addClass("wrong");
-                            loosers();
+
                             }
                         else if ($lamps.eq(2).hasClass("wrong") == false && $lamps.eq(1).hasClass("wrong") == false && $lamps.eq(0).hasClass("wrong") == true && stage > 1) {
                             $lamps.eq(1).addClass("wrong");
@@ -528,11 +485,12 @@ function npcSimulation() {
                         else if($lamps.eq(0).hasClass("wrong") == true && $lamps.eq(1).hasClass("wrong") == true ) {
                             $lamps.eq(2).addClass("wrong");
                             $this_npc.addClass("wrong out");
-                            loosers();
+
                             }
 
 
                         }
+                    }
         } //end if class=1
 
     } //for loop
@@ -788,7 +746,7 @@ $answerButt.on('click', function(ev) {
    			    console.log(secondNPCpointsToFinal);
    			    for (var t = 0; t < $final_npcs.length; t ++) {
    			        $final_npcs.eq(t).children().last().children().removeClass('wrong');
-                }
+                    }
                 $npc = $('.npc').not('.hidden');
                 alert("idzie to?!");
 

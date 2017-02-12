@@ -4,74 +4,74 @@
 
 {% block content %}
 
-  <div id='studio1'>
 
-    <div id='others'>
-    <section id='others_section'>
-        <!--reszta, inni - section-->
+<div id='others'>
+<section id='others_section'>
+    <!--reszta, inni - section-->
 
+    {% for npc in npcs %}
+    <div id="{{npc.id}}" class="npc" data-level="{{ npc.level }}" data-character="{{ npc.character }}">
+        <p>{{npc.name}}</p>
+        <img src="{{ npc.mug_shot.url }} ">
 
-        {% for npc in npcs %}
-        <div id="{{npc.id}}" class="npc" data-level="{{ npc.level }}" data-character="{{ npc.character }}">
-            <p>{{npc.name}}</p>
-            <img src="{{ npc.mug_shot.url }} ">
-
-            <div class="chances">
-                <div class="chance-lamp" data-id="chance_1" data-npc="{{npc.id}}"></div>
-                <div class="chance-lamp" data-id="chance_2" data-npc="{{npc.id}}"></div>
-                <div class="chance-lamp" data-id="chance_3" data-npc="{{npc.id}}"></div>
-            </div>
-
-        </div>
-        {% endfor%}
-    </section>
-    </div>
-      <div id='sznuk'>
-      <section id='sznuk_section'>sznuk - section</section>
-        <img class="bigimg" src="{{ sznuk.avatar.url }}">
-      </div>
-      <div id='player'>
-        <!--tu bedzie profil gracza-->
-            <h3> {{ player.user.username }} </h3>
-            <h4> {{ player.occupation }} </h4>
-            <img src="{{ STATIC_URL }}/static/media/{{player.mug_shot}} ">
-          <button class="btn">
-            <a href="{% url 'edit-player' %}">Edit Player</a>
-         </button>
-         <button class="btn">
-            <a href="{% url 'site-logout' %}">Logout</a>
-         </button>
-        <div class="chances-player">
-            <div class="chance-lamp-player" data-id="chance_3"></div>
-            <div class="chance-lamp-player" data-id="chance_2"></div>
-            <div class="chance-lamp-player" data-id="chance_1"></div>
-        </div>
-
-        <div id='question'>
-            <!--tu bedzie pytanie-->
-          <section id='query'>
-              <!--tu zadajemy pytanie - section-->
-            <section id='media'>
-              <div>
-              <!--media - czyli zdjęcia lub audio do pytania-->
-              </div>
-            </section>
-          </section>
-          <!--<div id='timerBar' class="progress"></div>-->
-        </div>
-        <div id='answer'>
-          <!-- <form action="#"  method="post"> -->
-            <label>Answer:<input id="answer-input" type='text' name='player_answer' autofocus></label>
-            <button id="answer-butt" class='btn btn-primary'>ANSWER</button>
-         <!--  </form> -->
-          <div id='comment' class='hidden'>
-            <!--tu bedzie komentarz-->
-          </div>
-
+        <div class="chances">
+            <div class="chance-lamp" data-id="chance_1" data-npc="{{npc.id}}"></div>
+            <div class="chance-lamp" data-id="chance_2" data-npc="{{npc.id}}"></div>
+            <div class="chance-lamp" data-id="chance_3" data-npc="{{npc.id}}"></div>
         </div>
 
     </div>
+    {% endfor%}
+
+</section>
+</div>
+
+  <div id='sznuk'>
+  <section id='sznuk_section'>sznuk - section</section>
+    <img class="bigimg" src="{{ sznuk.avatar.url }}">
   </div>
+  <div id='player'>
+    <!--tu bedzie profil gracza-->
+        <h3> {{ player.user.username }} </h3>
+        <h4> {{ player.occupation }} </h4>
+        <img src="{{ STATIC_URL }}/static/media/{{player.mug_shot}} ">
+      <button class="btn">
+        <a href="{% url 'edit-player' %}">Edit Player</a>
+     </button>
+     <button class="btn">
+        <a href="{% url 'site-logout' %}">Logout</a>
+     </button>
+    <div class="chances-player">
+        <div class="chance-lamp-player" data-id="chance_3"></div>
+        <div class="chance-lamp-player" data-id="chance_2"></div>
+        <div class="chance-lamp-player" data-id="chance_1"></div>
+    </div>
+
+    <div id='question'>
+        <!--tu bedzie pytanie-->
+      <section id='query'>
+          <!--tu zadajemy pytanie - section-->
+        <section id='media'>
+          <div>
+          <!--media - czyli zdjęcia lub audio do pytania-->
+          </div>
+        </section>
+      </section>
+      <!--<div id='timerBar' class="progress"></div>-->
+    </div>
+    <div id='answer'>
+      <!-- <form action="#"  method="post"> -->
+        <label>Answer:<input id="answer-input" type='text' name='player_answer' autofocus></label>
+        <button id="answer-butt" class='btn btn-primary'>ANSWER</button>
+     <!--  </form> -->
+      <div id='comment' class='hidden'>
+        <!--tu bedzie komentarz-->
+      </div>
+
+    </div>
+
+</div>
+
  {% endblock %}
 
 {% block footer %}
